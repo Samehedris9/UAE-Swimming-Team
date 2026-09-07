@@ -1,0 +1,4171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE National Swimming Team — High Performance Pathway | منظومة السباحة الإماراتية</title>
+
+    <!-- Meta Descriptions & SEO -->
+    <meta name="description"
+        content="UAE National Swimming Team High Performance Development & National Team Pathway. Technical Director: Captain Yasser El Farmawy. From Talent Identification to Olympic Performance.">
+    <meta name="keywords"
+        content="UAE Swimming, National Swimming Team, High Performance, Olympic Pathway, Captain Yasser El Farmawy, UAE Sports">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Local GSAP & ScrollTrigger Libraries -->
+    <script src="libraries/gsap.min.js"></script>
+    <script src="libraries/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* ==========================================================================
+           01. DESIGN SYSTEM & TOKENS
+           ========================================================================== */
+        :root {
+            --deep-ocean: #031B2B;
+            --navy: #063A5C;
+            --ocean-blue: #087EA4;
+            --cyan: #00B8D9;
+            --aqua: #37D5E8;
+            --white: #F7FAFC;
+            --gold-accent: #C9A227;
+            --gold-glow: rgba(201, 162, 39, 0.4);
+            --dark-overlay: rgba(3, 27, 43, 0.85);
+            --glass-bg: rgba(6, 58, 92, 0.35);
+            --glass-border: rgba(55, 213, 232, 0.2);
+            --glass-hover: rgba(8, 126, 164, 0.45);
+
+            --font-display: 'Bebas Neue', 'Cairo', sans-serif;
+            --font-heading: 'Montserrat', 'Cairo', sans-serif;
+            --font-body: 'Inter', 'Cairo', sans-serif;
+            --font-arabic: 'Cairo', sans-serif;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-smooth: all 0.4s var(--ease-out-expo);
+        }
+
+        /* Basic Reset & Base Styling */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--deep-ocean);
+            color: var(--white);
+            font-family: var(--font-body);
+            overflow: hidden;
+            /* Full-Screen Slide Deck Presentation */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Canvas Water Background */
+        #water-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Ambient Overlay Gradient for readability */
+        .ambient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 30%, rgba(8, 126, 164, 0.15) 0%, rgba(3, 27, 43, 0.85) 70%, rgba(3, 27, 43, 0.98) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Slide Deck Main Viewport Container */
+        #app-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           02. NAVIGATION & HEADER
+           ========================================================================== */
+        header.top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.25rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(3, 27, 43, 0.9) 0%, rgba(3, 27, 43, 0) 100%);
+            backdrop-filter: blur(8px);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .uae-emblem {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--gold-accent), var(--cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            color: var(--deep-ocean);
+            box-shadow: 0 0 20px rgba(0, 184, 217, 0.4);
+            letter-spacing: 1px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-logo-img {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            border-radius: 0;
+            flex-shrink: 0;
+        }
+
+        /* Waving UAE Flag Badge Top Center */
+        .uae-flag-center-badge {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 102;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(3, 27, 43, 0.9);
+            border: 1px solid var(--gold-accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        .flag-waving-container {
+            width: 34px;
+            height: 22px;
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            animation: flagWave 2.8s ease-in-out infinite alternate;
+            transform-origin: left center;
+        }
+
+        .flag-red-bar {
+            width: 28%;
+            height: 100%;
+            background: #FF0000;
+        }
+
+        .flag-stripes-right {
+            width: 72%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stripe-green {
+            height: 33.33%;
+            background: #007A3D;
+        }
+
+        .stripe-white {
+            height: 33.33%;
+            background: #FFFFFF;
+        }
+
+        .stripe-black {
+            height: 33.33%;
+            background: #000000;
+        }
+
+        @keyframes flagWave {
+            0% {
+                transform: perspective(200px) rotateY(0deg) skewY(0deg) scale(1);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            }
+            50% {
+                transform: perspective(200px) rotateY(-14deg) skewY(-2deg) scale(1.04);
+                box-shadow: -3px 3px 12px rgba(0,0,0,0.7);
+            }
+            100% {
+                transform: perspective(200px) rotateY(14deg) skewY(2deg) scale(1);
+                box-shadow: 3px 2px 10px rgba(0,0,0,0.5);
+            }
+        }
+
+        .brand-text h1 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-text span.gold-tag {
+            color: var(--gold-accent);
+            font-size: 0.75rem;
+            background: rgba(201, 162, 39, 0.15);
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            color: var(--cyan);
+            letter-spacing: 0.5px;
+        }
+
+        .director-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .director-badge .icon {
+            color: var(--gold-accent);
+            font-weight: bold;
+        }
+
+        .director-info {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .director-info .label {
+            font-size: 0.65rem;
+            color: rgba(247, 250, 252, 0.6);
+            text-transform: uppercase;
+        }
+
+        .director-info .name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* Vertical Navigation Panel (Absolute Far-Left Edge) */
+        nav.nav-sidebar {
+            position: fixed;
+            left: 1rem;
+            /* Pinned to absolute far-left edge */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(3, 27, 43, 0.85);
+            padding: 1rem 0.6rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-counter {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .nav-counter .total {
+            font-size: 0.75rem;
+            color: rgba(247, 250, 252, 0.4);
+            margin-top: 0.1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            padding: 0.25rem;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(247, 250, 252, 0.25);
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover .nav-dot,
+        .nav-item.active .nav-dot {
+            background: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan);
+            transform: scale(1.6);
+        }
+
+        .nav-item.active .nav-dot {
+            background: var(--gold-accent);
+            box-shadow: 0 0 14px var(--gold-accent);
+        }
+
+        .nav-label {
+            position: absolute;
+            left: 100%;
+            /* Opens smoothly to the right into screen area */
+            margin-left: 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: rgba(247, 250, 252, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition-smooth);
+            pointer-events: none;
+            background: rgba(3, 27, 43, 0.95);
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            direction: ltr;
+        }
+
+        .nav-item:hover .nav-label,
+        .nav-item.active .nav-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-item.active .nav-label {
+            color: var(--white);
+            border-color: var(--gold-accent);
+        }
+
+        /* Sound Control Button */
+        .sound-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .sound-toggle:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 184, 217, 0.3);
+            transform: scale(1.08);
+        }
+
+        /* Quick Jump Drawer Toggle */
+        .drawer-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .drawer-toggle:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        /* Video Modal & Video Play Button Styles */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 27, 43, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease-out-expo);
+        }
+
+        .video-modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-modal-container {
+            width: 90%;
+            max-width: 900px;
+            background: var(--navy);
+            border: 1px solid var(--gold-accent);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 0 50px rgba(201, 162, 39, 0.35);
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .video-modal-close:hover {
+            color: var(--gold-accent);
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        .video-modal-header {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+            text-align: right;
+            padding-left: 3rem;
+            direction: ltr;
+        }
+
+        .video-play-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(8, 126, 164, 0.3));
+            border: 1.5px solid var(--gold-accent);
+            padding: 0.75rem 1.25rem;
+            border-radius: 14px;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.25);
+            margin-top: 0.8rem;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .video-play-btn:hover {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.35), rgba(8, 126, 164, 0.5));
+            border-color: var(--cyan);
+            box-shadow: 0 0 30px var(--gold-glow);
+            transform: translateY(-3px);
+        }
+
+        .video-play-btn .play-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            color: var(--deep-ocean);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--gold-glow);
+            flex-shrink: 0;
+        }
+
+        /* Section Modal/Drawer Grid for Navigation */
+        .nav-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 27, 43, 0.96);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            padding: 4rem 3rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease-out-expo);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .close-modal:hover {
+            color: var(--cyan);
+            transform: rotate(90deg);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            overflow-y: auto;
+            max-height: 80vh;
+            padding-right: 0.5rem;
+        }
+
+        .modal-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .modal-card:hover {
+            background: var(--glass-hover);
+            border-color: var(--cyan);
+            transform: translateY(-3px);
+        }
+
+        .modal-card .num {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--gold-accent);
+        }
+
+        .modal-card .text {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* ==========================================================================
+           03. SECTION SLIDE BASE STYLES
+           ========================================================================== */
+        section.experience-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-height: 100vh;
+            padding: 4.5rem 2.5rem 1.5rem 4.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+            transform: scale(0.97) translateY(15px);
+            overflow: hidden;
+        }
+
+        section.experience-section.active-slide {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+            z-index: 5;
+        }
+
+        .section-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            max-height: calc(100vh - 5.5rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .section-container::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Edge */
+        }
+
+        /* Language Utility Formatting */
+        .lang-en {
+            direction: ltr !important;
+            font-family: var(--font-heading) !important;
+            text-align: left;
+        }
+
+        .lang-ar {
+            direction: rtl !important;
+            font-family: var(--font-arabic) !important;
+            text-align: right;
+        }
+
+        /* Typography Utilities */
+        .tagline {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--cyan);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            direction: ltr;
+        }
+
+        .tagline::before {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 2px;
+            background: var(--cyan);
+        }
+
+        .section-header-title {
+            font-family: var(--font-heading);
+            font-size: 2.1rem;
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+            direction: ltr;
+            text-align: right;
+            background: linear-gradient(135deg, #ffffff 0%, var(--aqua) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header-arabic {
+            font-family: var(--font-arabic);
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--gold-accent);
+            margin-bottom: 0.6rem;
+            line-height: 1.25;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .statement-box {
+            background: linear-gradient(135deg, rgba(8, 126, 164, 0.25), rgba(6, 58, 92, 0.4));
+            border-right: 4px solid var(--gold-accent);
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px 0 0 8px;
+            margin-top: 0.9rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .statement-box p {
+            font-family: var(--font-arabic);
+            direction: rtl;
+            text-align: right;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+        }
+
+        .statement-box .en-sub {
+            font-family: var(--font-heading);
+            direction: ltr;
+            text-align: right;
+            font-size: 0.82rem;
+            color: var(--cyan);
+            margin-top: 0.2rem;
+            font-weight: 600;
+        }
+
+        /* Card Styles */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            backdrop-filter: blur(12px);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 15px 35px rgba(0, 184, 217, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Grid Utilities */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.25rem;
+        }
+
+        /* Media Holder with Fallback */
+        .media-frame {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            background: var(--navy);
+        }
+
+        .media-frame img,
+        .media-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+
+        .media-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Overlay text on image frames */
+        .media-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(3, 27, 43, 0.95) 100%);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* ==========================================================================
+           04. SPECIFIC SECTION VISUALIZATIONS
+           ========================================================================== */
+
+        /* --- Section 01: Hero / Vision --- */
+        #section-01 {
+            padding-top: 4.5rem;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold-accent);
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            color: var(--gold-accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            direction: ltr;
+            font-family: var(--font-heading);
+        }
+
+        .hero-main-title {
+            font-family: var(--font-heading);
+            font-size: 2.6rem;
+            font-weight: 900;
+            line-height: 1.05;
+            color: var(--white);
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.2rem;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .hero-main-title span {
+            color: var(--cyan);
+            background: linear-gradient(135deg, var(--cyan), var(--aqua));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vision-bullets {
+            list-style: none;
+            margin-top: 0.6rem;
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .vision-bullets li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.45rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--white);
+            direction: rtl;
+            font-family: var(--font-arabic);
+            transition: var(--transition-smooth);
+        }
+
+        .vision-bullets li:hover {
+            background: var(--glass-hover);
+            border-color: var(--cyan);
+            transform: translateX(-5px);
+        }
+
+        .vision-bullets li .icon-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            box-shadow: 0 0 10px var(--gold-accent);
+            flex-shrink: 0;
+        }
+
+        .hero-media-box {
+            position: relative;
+            height: 310px;
+        }
+
+        /* --- Section 02: Why System --- */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .comp-card {
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            position: relative;
+        }
+
+        .comp-card.wrong {
+            background: rgba(180, 40, 40, 0.15);
+            border: 1px solid rgba(220, 60, 60, 0.3);
+        }
+
+        .comp-card.right {
+            background: rgba(0, 184, 217, 0.15);
+            border: 1px solid var(--cyan);
+            box-shadow: 0 0 30px rgba(0, 184, 217, 0.2);
+        }
+
+        .comp-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.2rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        .comp-card.wrong .comp-tag {
+            background: rgba(220, 60, 60, 0.2);
+            color: #ff6b6b;
+        }
+
+        .comp-card.right .comp-tag {
+            background: rgba(0, 184, 217, 0.2);
+            color: var(--cyan);
+        }
+
+        .comp-question {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.35;
+            margin-bottom: 0.4rem;
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        /* --- Section 03: Philosophy Pipeline --- */
+        .pipeline-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            position: relative;
+            gap: 0.8rem;
+        }
+
+        .pipeline-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--cyan), var(--gold-accent));
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        .pipe-node {
+            position: relative;
+            z-index: 2;
+            background: var(--deep-ocean);
+            border: 2px solid var(--glass-border);
+            padding: 0.6rem 0.4rem;
+            border-radius: 12px;
+            text-align: center;
+            width: 15%;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .pipe-node:hover {
+            border-color: var(--cyan);
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 0 25px rgba(0, 184, 217, 0.4);
+        }
+
+        .pipe-node.highlight {
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .pipe-num {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--gold-accent);
+            margin-bottom: 0.2rem;
+            direction: ltr;
+        }
+
+        .pipe-ar {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--white);
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        .pipe-en {
+            font-size: 0.7rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-top: 0.15rem;
+            font-weight: 600;
+            direction: ltr;
+            font-family: var(--font-heading);
+        }
+
+        /* --- Section 04: Structure Pyramid --- */
+        .structure-pyramid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            max-width: 900px;
+            margin: 0.8rem auto 0;
+        }
+
+        .pyr-level {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1.25rem;
+            border-radius: 10px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .pyr-level:hover {
+            transform: scale(1.01);
+            border-color: var(--cyan);
+        }
+
+        .pyr-level.senior {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.25), rgba(6, 58, 92, 0.6));
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .pyr-age {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--cyan);
+            direction: ltr;
+        }
+
+        .pyr-level.senior .pyr-age {
+            color: var(--gold-accent);
+        }
+
+        .pyr-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--white);
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        .pyr-desc {
+            font-size: 0.8rem;
+            color: rgba(247, 250, 252, 0.7);
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        /* --- Section 05: Database Dashboard --- */
+        .db-dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .db-tags-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.45rem;
+        }
+
+        .db-tag-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 0.6rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .db-tag-card:hover {
+            border-color: var(--cyan);
+            background: var(--glass-hover);
+        }
+
+        .db-tag-card .icon-chip {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(0, 184, 217, 0.2);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .db-tag-card .title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--white);
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        .swimmer-telemetry-preview {
+            background: linear-gradient(180deg, var(--navy), var(--deep-ocean));
+            border: 1px solid var(--cyan);
+            border-radius: 10px;
+            padding: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        transition: var(--transition-smooth);
+        }
+
+        .db-tag-card:hover {
+            border-color: var(--cyan);
+            background: var(--glass-hover);
+        }
+
+        .db-tag-card .icon-chip {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: rgba(0, 184, 217, 0.2);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .db-tag-card .title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .swimmer-telemetry-preview {
+            background: linear-gradient(180deg, var(--navy), var(--deep-ocean));
+            border: 1px solid var(--cyan);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .telemetry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .telemetry-row .val {
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        /* --- Section 06 & 07: Radar & Swimmer Score Donut --- */
+        .chart-visual-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 0.8rem;
+        }
+
+        .score-donut-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .donut-center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-center-text .score-num {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            color: var(--gold-accent);
+            line-height: 1;
+        }
+
+        .donut-center-text .score-lbl {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            direction: ltr;
+        }
+
+        .score-legend-list {
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.45rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-family: var(--font-arabic);
+            direction: rtl;
+        }
+
+        .legend-item .pct {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            color: var(--gold-accent);
+            direction: ltr;
+        }
+
+        /* --- Section 08: Selection Windows --- */
+        .selection-windows-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .window-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 0.8rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .window-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-4px);
+            background: var(--glass-hover);
+        }
+
+        .window-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            color: var(--cyan);
+        }
+
+        .window-card h3 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--white);
+            font-family: var(--font-arabic);
+            direction: rtl;
+        }
+
+        /* --- Section 09 & 10: Talent Identification & Pool --- */
+        .talent-pool-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .pool-layer {
+            padding: 0.85rem 1.4rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        .pool-layer.tier-1 {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.3), rgba(8, 126, 164, 0.4));
+            border: 2px solid var(--gold-accent);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .pool-layer.tier-2 {
+            background: rgba(8, 126, 164, 0.3);
+            border: 1px solid var(--cyan);
+        }
+
+        .pool-layer.tier-3 {
+            background: rgba(6, 58, 92, 0.4);
+            border: 1px solid var(--glass-border);
+        }
+
+        .pool-layer.tier-4 {
+            background: rgba(3, 27, 43, 0.5);
+            border: 1px dashed var(--glass-border);
+        }
+
+        /* --- Section 11: High Performance Training Model --- */
+        .training-pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .pillar-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.9rem 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .pillar-card:hover {
+            border-color: var(--cyan);
+            transform: scale(1.03);
+            background: var(--glass-hover);
+        }
+
+        .pillar-card h3 {
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--white);
+            direction: ltr;
+        }
+
+        /* --- Section 12: Race Analysis --- */
+        .race-timeline-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .race-metrics-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-top: 0.8rem;
+        }
+
+        .race-metric-pill {
+            background: rgba(3, 27, 43, 0.7);
+            border: 1px solid var(--cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+            font-family: var(--font-heading);
+            direction: ltr;
+        }
+
+        .race-metric-pill:hover {
+            background: var(--cyan);
+            color: var(--deep-ocean);
+            transform: scale(1.04);
+        }
+
+        .race-metric-pill .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+        }
+
+        .example-callout {
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold-accent);
+            padding: 0.9rem 1.4rem;
+            border-radius: 10px;
+            margin-top: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .example-callout .sec-num {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            color: var(--gold-accent);
+            line-height: 1;
+            direction: ltr;
+        }
+
+        /* --- Section 13: Technology & Monitoring --- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .tech-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: var(--transition-smooth);
+        }
+
+        .tech-card:hover {
+            border-color: var(--aqua);
+            transform: translateY(-4px);
+            background: var(--glass-hover);
+        }
+
+        .tech-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: rgba(55, 213, 232, 0.15);
+            color: var(--aqua);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* --- Section 14: Competition Pathway --- */
+        .comp-path-staircase {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+        }
+
+        .stair-step {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+        }
+
+        .stair-step:hover {
+            transform: translateX(-6px);
+            border-color: var(--cyan);
+        }
+
+        .stair-step.olympic {
+            background: linear-gradient(90deg, rgba(201, 162, 39, 0.35), rgba(8, 126, 164, 0.5));
+            border: 2px solid var(--gold-accent);
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .stair-step.olympic .stair-title {
+            color: var(--gold-accent);
+            font-size: 1.2rem;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            direction: ltr;
+        }
+
+        /* --- Section 15: KPI --- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .kpi-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1.1rem 0.9rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .kpi-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-5px);
+        }
+
+        .kpi-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-top: 0.3rem;
+            font-family: var(--font-heading);
+            direction: ltr;
+        }
+
+        /* --- Section 16: Technical & Scientific Team --- */
+        .team-ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .team-member-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .team-member-card.director {
+            grid-column: span 4;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2), rgba(6, 58, 92, 0.6));
+            border: 2px solid var(--gold-accent);
+            padding: 1.2rem;
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+
+        .team-member-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+        }
+
+        .team-role-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--white);
+            font-family: var(--font-heading);
+            direction: ltr;
+        }
+
+        /* --- Section 17 & 18: Curriculum & Coach Dev --- */
+        .curriculum-ages-flex {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .age-curr-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .age-curr-card:hover {
+            border-color: var(--cyan);
+            background: var(--glass-hover);
+        }
+
+        .age-curr-card .age-label {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--cyan);
+            margin-bottom: 0.3rem;
+            direction: ltr;
+        }
+
+        /* --- Section 19: Implementation Roadmap --- */
+        .roadmap-timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .roadmap-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1.25rem 1rem;
+            border-radius: 12px;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .roadmap-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px var(--gold-glow);
+        }
+
+        .roadmap-timeframe {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            margin-bottom: 0.3rem;
+            direction: rtl;
+            font-family: var(--font-arabic);
+        }
+
+        .roadmap-phase-title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            direction: ltr;
+        }
+
+        /* --- Section 20: UAE Swimming 2032 --- */
+        .olympic-2032-banner {
+            background: linear-gradient(135deg, rgba(3, 27, 43, 0.95), rgba(6, 58, 92, 0.9)), url('images/hero.jpg') center/cover;
+            border: 2px solid var(--gold-accent);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+            margin-top: 0.8rem;
+        }
+
+        .year-sequence-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+            flex-wrap: wrap;
+        }
+
+        .year-chip {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            padding: 0.25rem 0.8rem;
+            background: rgba(3, 27, 43, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            color: var(--cyan);
+            transition: var(--transition-smooth);
+            direction: ltr;
+        }
+
+        .year-chip.target-2032 {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            background: rgba(201, 162, 39, 0.2);
+            box-shadow: 0 0 20px var(--gold-glow);
+            transform: scale(1.08);
+        }
+
+        .generations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .gen-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.9rem;
+            border-radius: 10px;
+            text-align: right;
+        }
+
+        .gen-card h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--gold-accent);
+            margin-bottom: 0.2rem;
+            font-family: var(--font-arabic);
+            direction: rtl;
+        }
+
+        /* --- Section 21: Our Commitment --- */
+        #section-21 {
+            background: radial-gradient(circle at 50% 50%, rgba(8, 126, 164, 0.25) 0%, rgba(3, 27, 43, 0.98) 80%);
+        }
+
+        .commitment-box {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .commitment-en-main {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.25;
+            margin-bottom: 0.6rem;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            direction: ltr;
+        }
+
+        .commitment-ar-main {
+            font-family: var(--font-arabic);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold-accent);
+            line-height: 1.35;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 25px var(--gold-glow);
+            direction: rtl;
+        }
+
+        .commitment-final-quote {
+            background: linear-gradient(135deg, rgba(6, 58, 92, 0.7), rgba(3, 27, 43, 0.9));
+            border: 2px solid var(--gold-accent);
+            padding: 1.1rem 1.5rem;
+            border-radius: 14px;
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+            margin-top: 0.8rem;
+        }
+
+        .commitment-final-quote p {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.35;
+            font-family: var(--font-arabic);
+            direction: rtl;
+        }
+
+        /* Footer info */
+        footer.app-footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: rgba(247, 250, 252, 0.5);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+        }
+
+        .fullscreen-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--cyan);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+            font-family: var(--font-arabic);
+        }
+
+        .fullscreen-btn:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            background: var(--glass-hover);
+            box-shadow: 0 0 15px var(--gold-glow);
+            transform: scale(1.05);
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1200px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-4,
+            .grid-5,
+            .curriculum-ages-flex,
+            .training-pillars-grid,
+            .kpi-grid,
+            .team-ecosystem-grid,
+            .roadmap-timeline-grid,
+            .selection-windows-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-member-card.director {
+                grid-column: span 2;
+            }
+
+            .pipeline-wrapper {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pipe-node {
+                width: 45%;
+            }
+
+            .pipeline-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header.top-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .director-badge {
+                display: none;
+            }
+
+            section.experience-section {
+                padding: 6rem 1.5rem 3rem 1.5rem;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4,
+            .grid-5,
+            .comp-card,
+            .comparison-container,
+            .db-dashboard-grid,
+            .chart-visual-container,
+            .generations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-main-title {
+                font-size: 2.5rem;
+            }
+
+            .section-header-title {
+                font-size: 2rem;
+            }
+
+            .section-header-arabic {
+                font-size: 1.6rem;
+            }
+
+            nav.nav-sidebar {
+                display: none;
+            }
+
+            .pipe-node {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Continuously Animated Underwater Canvas Background -->
+    <canvas id="water-canvas"></canvas>
+
+    <!-- Ambient Overlay Gradient -->
+    <div class="ambient-overlay"></div>
+
+    <!-- Small Waving UAE Flag Badge (Top Center Across All Pages) -->
+    <div class="uae-flag-center-badge" title="الإمارات العربية المتحدة — UAE National Swimming Team">
+        <div class="flag-waving-container">
+            <div class="flag-red-bar"></div>
+            <div class="flag-stripes-right">
+                <div class="stripe-green"></div>
+                <div class="stripe-white"></div>
+                <div class="stripe-black"></div>
+            </div>
+        </div>
+        <span style="font-family: var(--font-arabic); font-weight: 800; font-size: 0.75rem; color: var(--gold-accent); letter-spacing: 0.5px;">الإمارات</span>
+    </div>
+
+    <!-- Header Bar -->
+    <header class="top-header">
+        <div class="brand-container">
+            <img src="images/UAE Sports Loog.jpeg" alt="UAE Sports Logo" class="header-logo-img">
+            <div class="brand-text">
+                <h1>UAE National Swimming Team</h1>
+                <p>منظومة متكاملة لبناء وتطوير المنتخبات الوطنية للسباحة</p>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="fullscreen-btn" id="fullscreen-btn" title="تفعيل الشاشة الكاملة">⛶ ملء الشاشة</button>
+            <div class="director-badge">
+                <span class="icon">★</span>
+                <div class="director-info">
+                    <span class="label">Technical Director</span>
+                    <span class="name">Captain Yasser El Farmawy</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Side Navigation Sidebar -->
+    <nav class="nav-sidebar">
+        <div class="nav-counter">
+            <span id="current-sec-num">01</span>
+            <span class="total">/ 29</span>
+        </div>
+        <!-- Dynamic Nav Dots render via JS -->
+        <div id="nav-dots-container"></div>
+    </nav>
+
+    <!-- Sound Audio Toggle & Drawer Buttons -->
+    <button class="sound-toggle" id="sound-btn" title="Toggle Ambient Audio">🔊</button>
+    <button class="drawer-toggle" id="drawer-btn">☰ قائمة الأقسام</button>
+
+    <!-- Quick Navigation Modal / Drawer -->
+    <div class="nav-modal" id="nav-modal">
+        <div class="modal-header">
+            <div class="modal-title">UAE SWIMMING PERFORMANCE SYSTEM — SECTIONS</div>
+            <button class="close-modal" id="close-modal-btn">&times;</button>
+        </div>
+        <div class="modal-grid" id="modal-grid">
+            <!-- Modal section cards inserted via JS -->
+        </div>
+    </div>
+
+    <!-- MAIN APP EXPERIENCE CONTAINER -->
+    <div id="app-container">
+
+        <!-- ==========================================================================
+           01 — OUR VISION & HERO VIDEO BACKGROUND
+           ========================================================================== -->
+        <section class="experience-section hero-video-section" id="section-01" data-section-name="OUR VISION" style="position: relative; overflow: hidden;">
+            <!-- Background Video element -->
+            <video autoplay loop muted playsinline preload="auto" class="section-bg-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.55;">
+                <source src="videos/hero.mp4" type="video/mp4">
+            </video>
+            <!-- Overlay Gradient for Readability -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(3,27,43,0.75) 0%, rgba(3,27,43,0.6) 50%, rgba(3,27,43,0.85) 100%); z-index: 2;"></div>
+
+            <div class="section-container hero-layout" style="position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="hero-content" style="width: 100%; max-width: 900px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    
+                    <!-- Flag + Badge Row -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                        <div class="flag-waving-container" style="width: 38px; height: 24px; border-radius: 4px; box-shadow: 0 0 12px rgba(255,255,255,0.3);">
+                            <div class="flag-red-bar"></div>
+                            <div class="flag-stripes-right">
+                                <div class="stripe-green"></div>
+                                <div class="stripe-white"></div>
+                                <div class="stripe-black"></div>
+                            </div>
+                        </div>
+                        <div class="hero-badge" style="margin-bottom: 0; font-size: 0.88rem; padding: 0.35rem 1.1rem;">
+                            NATIONAL TEAM PATHWAY • منظومة المنتخبات الوطنية
+                        </div>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="hero-main-title" style="font-size: 3.2rem; text-align: center; text-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 0.4rem; direction: ltr;">
+                        UAE NATIONAL<br><span style="color: var(--cyan);">SWIMMING TEAM</span>
+                    </h1>
+                    <div class="section-header-arabic" style="font-size: 1.6rem; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">منظومة بناء وتطوير المنتخبات الوطنية للسباحة</div>
+
+                    <p style="font-size: 1.15rem; color: rgba(247,250,252,0.95); line-height: 1.6; max-width: 750px; margin: 0.8rem 0; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                        أن تصبح السباحة الإماراتية منظومة وطنية عالية الأداء قادرة على التميز والتطوير المستدام من مرحلة البراعم إلى المستوى الأولمبي.
+                    </p>
+
+                    <!-- Vision Grid Pills -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: 100%; max-width: 800px; margin-top: 0.5rem;">
+                        <div class="glass-card" style="padding: 0.6rem 0.8rem; font-size: 0.85rem; font-weight: 700; color: var(--white); text-align: center; border-color: rgba(55,213,232,0.3);">
+                            🎯 اكتشاف المواهب المبكرة
+                        </div>
+                        <div class="glass-card" style="padding: 0.6rem 0.8rem; font-size: 0.85rem; font-weight: 700; color: var(--white); text-align: center; border-color: rgba(55,213,232,0.3);">
+                            🧬 المنهج العلمي الموحد
+                        </div>
+                        <div class="glass-card" style="padding: 0.6rem 0.8rem; font-size: 0.85rem; font-weight: 700; color: var(--white); text-align: center; border-color: rgba(55,213,232,0.3);">
+                            🏆 استدامة الإنجاز الأولمبي
+                        </div>
+                    </div>
+
+                    <div class="statement-box" style="margin-top: 1rem; width: 100%; max-width: 800px; background: rgba(3,27,43,0.8); border: 1px solid var(--gold-accent);">
+                        <p style="font-size: 1.1rem; color: var(--gold-accent); font-weight: 800;">From Talent Identification to Olympic Performance</p>
+                        <div class="en-sub" style="font-size: 0.95rem; color: var(--white);">من اكتشاف المواهب والقياس الرقمي إلى الإنجاز الأولمبي المستدام</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           02 — WHY A COMPLETE SYSTEM?
+           ========================================================================== -->
+        <section class="experience-section" id="section-02" data-section-name="WHY A SYSTEM">
+            <div class="section-container">
+                <div class="tagline">02 — STRATEGIC VISION</div>
+                <h2 class="section-header-title">WHY A COMPLETE SYSTEM?</h2>
+                <div class="section-header-arabic">لماذا نحتاج إلى منظومة متكاملة؟</div>
+
+                <div class="comparison-container">
+                    <div class="comp-card wrong">
+                        <span class="comp-tag">السؤال التقليدي | Traditional Question</span>
+                        <div class="comp-question">من هم أفضل السباحين اليوم؟</div>
+                        <p style="color: rgba(247,250,252,0.7); font-size: 0.95rem; margin-top: 1rem;">
+                            التركيز الفردي اللحظي دون بناء القاعدة المستقبلية يسبب انقطاع النتائج بعد كل جيل.
+                        </p>
+                    </div>
+
+                    <div class="comp-card right">
+                        <span class="comp-tag">سؤال المنظومة | Systemic Question</span>
+                        <div class="comp-question">كيف نضمن وجود أفضل السباحين الإماراتيين في كل فئة عمرية خلال السنوات
+                            القادمة؟</div>
+                        <p style="color: rgba(247,250,252,0.85); font-size: 0.95rem; margin-top: 1rem;">
+                            بناء بيئة موحدة ومستدامة تضمن التغذية المستمرة للمنتخبات الوطنية في مختلف المراحل السنية.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>الفرق بين اختيار منتخب وبناء منظومة منتخب وطني.</p>
+                    <div class="en-sub">The difference between selecting a national team and building a national team
+                        system.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           03 — OUR PHILOSOPHY
+           ========================================================================== -->
+        <section class="experience-section" id="section-03" data-section-name="PHILOSOPHY">
+            <div class="section-container">
+                <div class="tagline">03 — CORE PIPELINE</div>
+                <h2 class="section-header-title">OUR PHILOSOPHY</h2>
+                <div class="section-header-arabic">فلسفة المشروع | Our Philosophy</div>
+
+                <div class="pipeline-wrapper">
+                    <div class="pipe-node">
+                        <div class="pipe-num">01</div>
+                        <div class="pipe-ar">اكتشاف</div>
+                        <div class="pipe-en">IDENTIFY</div>
+                    </div>
+                    <div class="pipe-node">
+                        <div class="pipe-num">02</div>
+                        <div class="pipe-ar">تقييم</div>
+                        <div class="pipe-en">ASSESS</div>
+                    </div>
+                    <div class="pipe-node">
+                        <div class="pipe-num">03</div>
+                        <div class="pipe-ar">انتقاء</div>
+                        <div class="pipe-en">SELECT</div>
+                    </div>
+                    <div class="pipe-node">
+                        <div class="pipe-num">04</div>
+                        <div class="pipe-ar">تطوير</div>
+                        <div class="pipe-en">DEVELOP</div>
+                    </div>
+                    <div class="pipe-node">
+                        <div class="pipe-num">05</div>
+                        <div class="pipe-ar">منافسة</div>
+                        <div class="pipe-en">COMPETE</div>
+                    </div>
+                    <div class="pipe-node highlight">
+                        <div class="pipe-num">06</div>
+                        <div class="pipe-ar">إنجاز</div>
+                        <div class="pipe-en">PERFORM</div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3.5rem;">
+                    <p>Creating a sustainable pipeline of elite UAE swimmers.</p>
+                    <div class="en-sub">إنشاء مسار تدفق مستدام لصناعة سباحين إماراتيين على مستوى النخبة.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           04 — NATIONAL TEAM STRUCTURE
+           ========================================================================== -->
+        <section class="experience-section" id="section-04" data-section-name="TEAM STRUCTURE">
+            <div class="section-container">
+                <div class="tagline">04 — AGE-GROUP PIPELINE</div>
+                <h2 class="section-header-title">NATIONAL TEAM STRUCTURE</h2>
+                <div class="section-header-arabic">منظومة المنتخبات الوطنية</div>
+
+                <div class="structure-pyramid">
+                    <div class="pyr-level senior">
+                        <div class="pyr-age">Senior National Team</div>
+                        <div>
+                            <div class="pyr-title">منتخب الكبار</div>
+                            <div class="pyr-desc">نخبة المنتخب والإعداد للأعلى مستوى والأولمبياد</div>
+                        </div>
+                    </div>
+
+                    <div class="pyr-level">
+                        <div class="pyr-age">U16 – U18</div>
+                        <div>
+                            <div class="pyr-title">Junior Elite | الناشئين والنخبة</div>
+                            <div class="pyr-desc">إعداد قاري وعالمي متقدم وتخصص احترافي</div>
+                        </div>
+                    </div>
+
+                    <div class="pyr-level">
+                        <div class="pyr-age">U14 – U15</div>
+                        <div>
+                            <div class="pyr-title">Performance | الأداء والتخصص</div>
+                            <div class="pyr-desc">التخصص والمنافسة الإقليمية</div>
+                        </div>
+                    </div>
+
+                    <div class="pyr-level">
+                        <div class="pyr-age">U12 – U13</div>
+                        <div>
+                            <div class="pyr-title">Development | التطوير</div>
+                            <div class="pyr-desc">تطوير المهارات والقدرات البدنية والفنية</div>
+                        </div>
+                    </div>
+
+                    <div class="pyr-level">
+                        <div class="pyr-age">U10 – U11</div>
+                        <div>
+                            <div class="pyr-title">Foundation | التأسيس</div>
+                            <div class="pyr-desc">اكتشاف وتأسيس المهارات القاعدة الأساسية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           05 — NATIONAL PERFORMANCE DATABASE
+           ========================================================================== -->
+        <section class="experience-section" id="section-05" data-section-name="DATABASE">
+            <div class="section-container">
+                <div class="tagline">05 — DATA-DRIVEN SELECTION</div>
+                <h2 class="section-header-title">NATIONAL PERFORMANCE DATABASE</h2>
+                <div class="section-header-arabic">قاعدة البيانات الوطنية للسباحين</div>
+
+                <div class="db-dashboard-grid">
+                    <div class="db-tags-container">
+                        <div class="db-tag-card">
+                            <div class="icon-chip">📊</div>
+                            <div class="title">العمر والنادي والمدرب</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">📐</div>
+                            <div class="title">القياسات الأنثروبومترية</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">⏱</div>
+                            <div class="title">أفضل الأزمنة (PBs)</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">📈</div>
+                            <div class="title">التطور السنوي</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">🏊</div>
+                            <div class="title">التخصص والسباقات</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">🏆</div>
+                            <div class="title">World Aquatics Points</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">🥇</div>
+                            <div class="title">البطولات والنتائج الدولية</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">🩺</div>
+                            <div class="title">سجل الإصابات والتعافي</div>
+                        </div>
+                        <div class="db-tag-card">
+                            <div class="icon-chip">⚖</div>
+                            <div class="title">الحمل التدريبي وسجل القوة</div>
+                        </div>
+                    </div>
+
+                    <div class="swimmer-telemetry-preview">
+                        <div class="telemetry-header">
+                            <span style="font-weight: 800; color: var(--gold-accent);">ATHLETE TELEMETRY CARD</span>
+                            <span style="font-size: 0.75rem; color: var(--cyan);">LIVE STATUS</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span>Athlete ID:</span>
+                            <span class="val">UAE-SW-9042</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span>Age / Category:</span>
+                            <span class="val">16 YRS (U18 Junior)</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span>World Aquatics Pts:</span>
+                            <span class="val">742 PTS</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span>Annual Progression:</span>
+                            <span class="val">+4.2% Improvement</span>
+                        </div>
+                        <div class="telemetry-row">
+                            <span>Selection Index:</span>
+                            <span class="val">Data-Based Certified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 2.5rem;">
+                    <p>القرار يصبح Data Based Selection وليس Opinion Based Selection</p>
+                    <div class="en-sub">Selections are strictly Data-Based, eliminated from subjective opinion bias.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           06 — PLAYER SELECTION SYSTEM
+           ========================================================================== -->
+        <section class="experience-section" id="section-06" data-section-name="SELECTION SYSTEM">
+            <div class="section-container">
+                <div class="tagline">06 — 5-DIMENSIONAL ASSESSMENT</div>
+                <h2 class="section-header-title">PLAYER SELECTION SYSTEM</h2>
+                <div class="section-header-arabic">نظام انتقاء اللاعبين — المحاور الخمسة</div>
+
+                <div class="grid-5" style="margin-top: 2.5rem;">
+                    <div class="glass-card">
+                        <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">PILLAR 01</span>
+                        <h3 style="font-size: 1.2rem; color: var(--white); margin: 0.5rem 0;">Performance</h3>
+                        <p style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">الزمن والنتيجة</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">PILLAR 02</span>
+                        <h3 style="font-size: 1.2rem; color: var(--white); margin: 0.5rem 0;">Technical</h3>
+                        <p style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">الكفاءة الفنية</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">PILLAR 03</span>
+                        <h3 style="font-size: 1.2rem; color: var(--white); margin: 0.5rem 0;">Physical</h3>
+                        <p style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">القدرات البدنية</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">PILLAR 04</span>
+                        <h3 style="font-size: 1.2rem; color: var(--white); margin: 0.5rem 0;">Psychological</h3>
+                        <p style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">الاستعداد النفسي</p>
+                    </div>
+
+                    <div class="glass-card">
+                        <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">PILLAR 05</span>
+                        <h3 style="font-size: 1.2rem; color: var(--white); margin: 0.5rem 0;">Development Potential</h3>
+                        <p style="font-size: 0.9rem; color: var(--gold-accent); font-weight: 700;">قابلية التطور</p>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>أفضل سباح اليوم ليس بالضرورة أفضل سباح بعد أربع سنوات.</p>
+                    <div class="en-sub">Today’s best swimmer is not necessarily the best swimmer in four years.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           07 — UAE SWIMMER SCORE
+           ========================================================================== -->
+        <section class="experience-section" id="section-07" data-section-name="SWIMMER SCORE">
+            <div class="section-container">
+                <div class="tagline">07 — UNIFIED WEIGHTED MODEL</div>
+                <h2 class="section-header-title">UAE SWIMMER SCORE</h2>
+                <div class="section-header-arabic">نموذج تقييم موحد مقترح</div>
+
+                <div class="chart-visual-container">
+                    <div class="score-donut-wrapper">
+                        <svg viewBox="0 0 200 200" width="100%" height="100%">
+                            <!-- Segment 1: Performance 35% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#C9A227" stroke-width="24"
+                                stroke-dasharray="175.9 326.7" stroke-dashoffset="0" />
+                            <!-- Segment 2: Technical Skills 20% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#00B8D9" stroke-width="24"
+                                stroke-dasharray="100.5 402.1" stroke-dashoffset="-175.9" />
+                            <!-- Segment 3: Physical Capacity 15% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#087EA4" stroke-width="24"
+                                stroke-dasharray="75.4 427.2" stroke-dashoffset="-276.4" />
+                            <!-- Segment 4: Competition Performance 15% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#37D5E8" stroke-width="24"
+                                stroke-dasharray="75.4 427.2" stroke-dashoffset="-351.8" />
+                            <!-- Segment 5: Development Potential 10% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#063A5C" stroke-width="24"
+                                stroke-dasharray="50.2 452.4" stroke-dashoffset="-427.2" />
+                            <!-- Segment 6: Psychological Profile 5% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#ffffff" stroke-width="24"
+                                stroke-dasharray="25.1 477.5" stroke-dashoffset="-477.4" />
+                        </svg>
+                        <div class="donut-center-text">
+                            <div class="score-num">100%</div>
+                            <div class="score-lbl">WEIGHTED SCORE</div>
+                        </div>
+                    </div>
+
+                    <div class="score-legend-list">
+                        <div class="legend-item">
+                            <span>Performance (الزمن والنتيجة)</span>
+                            <span class="pct">35%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span>Technical Skills (الكفاءة الفنية)</span>
+                            <span class="pct">20%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span>Physical Capacity (القدرات البدنية)</span>
+                            <span class="pct">15%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span>Competition Performance (الأداء التنافسي)</span>
+                            <span class="pct">15%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span>Development Potential (قابلية التطور)</span>
+                            <span class="pct">10%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span>Psychological Profile (الاستعداد النفسي)</span>
+                            <span class="pct">5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 2.5rem;">
+                    <p>يتم تحديث التقييم بصورة دورية وشفافة.</p>
+                    <div class="en-sub">Evaluations are updated periodically with absolute transparency.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           08 — NATIONAL SELECTION WINDOWS
+           ========================================================================== -->
+        <section class="experience-section" id="section-08" data-section-name="SELECTION WINDOWS">
+            <div class="section-container">
+                <div class="tagline">08 — MULTI-PHASE EVALUATION</div>
+                <h2 class="section-header-title">NATIONAL SELECTION WINDOWS</h2>
+                <div class="section-header-arabic">فترات الاختيار والتأهيل الوطنية</div>
+
+                <p style="font-size: 1.1rem; color: var(--gold-accent); font-weight: 700;">
+                    لا يعتمد اختيار المنتخب على بطولة واحدة.
+                </p>
+
+                <div class="selection-windows-grid">
+                    <div class="window-card">
+                        <div class="window-icon">🏆</div>
+                        <h3>البطولات المحلية</h3>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-icon">📋</div>
+                        <h3>اختبارات الاتحاد</h3>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-icon">🌍</div>
+                        <h3>البطولات الدولية</h3>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-icon">🏊‍♂️</div>
+                        <h3>المعسكرات</h3>
+                    </div>
+                    <div class="window-card">
+                        <div class="window-icon">🏋️‍♂️</div>
+                        <h3>الاختبارات الفنية والبدنية</h3>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>يتم احتساب متوسط الأداء عبر فترة زمنية محددة.</p>
+                    <div class="en-sub">Performance average is calculated over a defined multi-window period.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           09 — TALENT IDENTIFICATION PROGRAM
+           ========================================================================== -->
+        <section class="experience-section" id="section-09" data-section-name="TALENT ID">
+            <div class="section-container">
+                <div class="tagline">09 — NATIONAL SEARCH</div>
+                <h2 class="section-header-title">TALENT IDENTIFICATION PROGRAM</h2>
+                <div class="section-header-arabic">برنامج اكتشاف المواهب — UAE Talent ID</div>
+
+                <div class="grid-5" style="margin-top: 2.5rem;">
+                    <div class="glass-card" style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏫</div>
+                        <h3 style="font-size: 1.1rem;">المدارس</h3>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏟</div>
+                        <h3 style="font-size: 1.1rem;">الأندية</h3>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏊</div>
+                        <h3 style="font-size: 1.1rem;">الأكاديميات</h3>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📍</div>
+                        <h3 style="font-size: 1.1rem;">مراكز التدريب</h3>
+                    </div>
+                    <div class="glass-card" style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🥇</div>
+                        <h3 style="font-size: 1.1rem;">البطولات المدرسية</h3>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>أفضل المواهب تدخل National Talent Pool.</p>
+                    <div class="en-sub">The finest talents enter the National Talent Pool automatically.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           10 — TALENT POOL
+           ========================================================================== -->
+        <section class="experience-section" id="section-10" data-section-name="TALENT POOL">
+            <div class="section-container">
+                <div class="tagline">10 — PIPELINE SAFETY NET</div>
+                <h2 class="section-header-title">TALENT POOL</h2>
+                <div class="section-header-arabic">مجموعات المواهب المزدوجة</div>
+
+                <div class="talent-pool-layers">
+                    <div class="pool-layer tier-1">
+                        <div>
+                            <span style="font-weight: 900; font-size: 1.3rem; color: var(--gold-accent);">National
+                                Team</span>
+                            <div style="font-size: 0.9rem; color: var(--white);">أفضل مجموعة للمنافسات والمنتخب</div>
+                        </div>
+                        <span
+                            style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-accent);">TIER
+                            01</span>
+                    </div>
+
+                    <div class="pool-layer tier-2">
+                        <div>
+                            <span style="font-weight: 900; font-size: 1.2rem; color: var(--cyan);">National Development
+                                Team</span>
+                            <div style="font-size: 0.9rem; color: var(--white);">المجموعة التالية الجاهزة للتصعيد</div>
+                        </div>
+                        <span style="font-family: var(--font-display); font-size: 1.4rem; color: var(--cyan);">TIER
+                            02</span>
+                    </div>
+
+                    <div class="pool-layer tier-3">
+                        <div>
+                            <span style="font-weight: 900; font-size: 1.1rem; color: var(--white);">National Talent
+                                Pool</span>
+                            <div style="font-size: 0.9rem; color: rgba(247,250,252,0.7);">المواهب الواعدة تحت الرعاية
+                                والتقييم</div>
+                        </div>
+                        <span style="font-family: var(--font-display); font-size: 1.2rem; color: var(--white);">TIER
+                            03</span>
+                    </div>
+
+                    <div class="pool-layer tier-4">
+                        <div>
+                            <span style="font-weight: 900; font-size: 1rem; color: rgba(247,250,252,0.7);">Regional
+                                Talent Pool</span>
+                            <div style="font-size: 0.9rem; color: rgba(247,250,252,0.5);">مواهب تحتاج مزيداً من التطوير
+                                في المناطق</div>
+                        </div>
+                        <span
+                            style="font-family: var(--font-display); font-size: 1.1rem; color: rgba(247,250,252,0.5);">TIER
+                            04</span>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>الهدف: عدم خسارة أي موهبة بسبب عدم جاهزيتها في محاولة واحدة.</p>
+                    <div class="en-sub">Goal: Zero talents lost due to being unready in a single trial.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           11 — HIGH PERFORMANCE TRAINING MODEL
+           ========================================================================== -->
+        <section class="experience-section" id="section-11" data-section-name="TRAINING MODEL">
+            <div class="section-container">
+                <div class="tagline">11 — SCIENTIFIC PREPARATION</div>
+                <h2 class="section-header-title">HIGH PERFORMANCE TRAINING MODEL</h2>
+                <div class="section-header-arabic">نموذج التدريب عالي الأداء</div>
+
+                <div class="training-pillars-grid">
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🏊‍♂️</div>
+                        <h3>Technique</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">التكنيك
+                            والكفاءة الفنية</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🏋️‍♂️</div>
+                        <h3>Strength & Conditioning</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">القوة والإعداد
+                            البدني</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🫁</div>
+                        <h3>Aerobic Capacity</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">السعة الهوائية
+                            والتحمل</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">⚡</div>
+                        <h3>Speed</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">السرعة
+                            والانفجارية</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">⏱</div>
+                        <h3>Race Skills</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">مهارات السباق
+                            والبدء والدوران</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🧊</div>
+                        <h3>Recovery</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">الاستشفاء
+                            والتجدد</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🧠</div>
+                        <h3>Sports Psychology</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">الإعداد النفسي
+                            الرياضي</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--cyan);">🥗</div>
+                        <h3>Nutrition</h3>
+                        <p style="font-size: 0.85rem; color: rgba(247,250,252,0.7); margin-top: 0.3rem;">التغذية
+                            الرياضية المتقدمة</p>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>التدريب لا يعني زيادة الكيلومترات فقط؛ بل تحسين جودة كل متر في الماء.</p>
+                    <div class="en-sub">Training is not just adding volume; it is maximizing the quality of every single
+                        meter in the water.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           12 — RACE ANALYSIS
+           ========================================================================== -->
+        <section class="experience-section" id="section-12" data-section-name="RACE ANALYSIS">
+            <div class="section-container">
+                <div class="tagline">12 — SPLIT-SECOND PRECISION</div>
+                <h2 class="section-header-title">RACE ANALYSIS</h2>
+                <div class="section-header-arabic">تحليل السباق والتجزئة الزمنية</div>
+
+                <div class="race-timeline-box">
+                    <div style="font-weight: 800; color: var(--gold-accent); font-size: 1.1rem; text-align: center;">
+                        RACE TELEMETRY METRICS
+                    </div>
+
+                    <div class="race-metrics-flex">
+                        <div class="race-metric-pill"><span class="dot"></span> Reaction Time</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Underwater</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Breakout</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Stroke Rate</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Stroke Length</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Turn</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Finish</div>
+                        <div class="race-metric-pill"><span class="dot"></span> First 50m</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Second 50m</div>
+                        <div class="race-metric-pill"><span class="dot"></span> Closing Speed</div>
+                    </div>
+                </div>
+
+                <div class="example-callout">
+                    <div class="sec-num">0.40s</div>
+                    <div>
+                        <div style="font-size: 1.1rem; font-weight: 800; color: var(--white);">إذا خسر السباح 0.40
+                            ثانية، نحدد أين خسرها وكيف نستعيدها.</div>
+                        <div style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.3rem;">If a swimmer loses
+                            0.40s, we pinpoint precisely where it was lost and how to recover it.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           13 — TECHNOLOGY & PERFORMANCE MONITORING
+           ========================================================================== -->
+        <section class="experience-section" id="section-13" data-section-name="TECHNOLOGY">
+            <div class="section-container">
+                <div class="tagline">13 — HIGH TECH MONITORING</div>
+                <h2 class="section-header-title">TECHNOLOGY & PERFORMANCE MONITORING</h2>
+                <div class="section-header-arabic">التكنولوجيا ومتابعة الأداء</div>
+
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-icon">📹</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Underwater Video</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">التصوير المائي تحت الماء</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-icon">💻</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Race Video Analysis</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">تحليل فيديو السباقات</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-icon">⏱</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Timing Analysis</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">تحليل الأزمنة الدقيق</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-icon">📡</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Athlete Monitoring</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">متابعة مؤشرات الرياضي</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-icon">📊</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Training Load Monitoring</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">مراقبة الحمل التدريبي</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card">
+                        <div class="tech-icon">🖥</div>
+                        <div>
+                            <div style="font-weight: 800; color: var(--white);">Performance Dashboard</div>
+                            <div style="font-size: 0.85rem; color: var(--cyan);">لوحة بيانات الأداء</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>لوحة بيانات موحدة تساعد الاتحاد والجهاز الفني على اتخاذ قرارات دقيقة.</p>
+                    <div class="en-sub">A unified analytics command center guiding precise technical decisions.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           14 — COMPETITION PATHWAY
+           ========================================================================== -->
+        <section class="experience-section" id="section-14" data-section-name="COMPETITION PATHWAY">
+            <div class="section-container">
+                <div class="tagline">14 — INTERNATIONAL STAIRWAY</div>
+                <h2 class="section-header-title">COMPETITION PATHWAY</h2>
+                <div class="section-header-arabic">مسار البطولات والتدرج الدولي</div>
+
+                <div class="comp-path-staircase">
+                    <div class="stair-step olympic">
+                        <span class="stair-title">Olympic Games</span>
+                        <span style="font-weight: 800; color: var(--gold-accent);">الألعاب الأولمبية — القمة
+                            العالمية</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">World Championships / Asian Games</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">بطولات العالم والألعاب الآسيوية</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">World Aquatics Events</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">فعاليات الاتحاد الدولي للسباحة</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">Asian Championships / Asian Age
+                            Group</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">البطولات الآسيوية وفئات المراحل
+                            السنية</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">Arab Championships</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">البطولات العربية</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">GCC Championships</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">بطولات الخليج العربي</span>
+                    </div>
+
+                    <div class="stair-step">
+                        <span style="font-weight: 800; color: var(--white);">Local Championships</span>
+                        <span style="font-size: 0.9rem; color: var(--cyan);">البطولات المحلية والتأسيسية</span>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 2.5rem;">
+                    <p>المشاركة الدولية تكون مخططة وفق عمر السباح ومستواه وأهدافه.</p>
+                    <div class="en-sub">International participation is periodized around the athlete’s age, baseline,
+                        and strategic goals.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           15 — SUCCESS KPI
+           ========================================================================== -->
+        <section class="experience-section" id="section-15" data-section-name="SUCCESS KPI">
+            <div class="section-container">
+                <div class="tagline">15 — METRICS OF EXCELLENCE</div>
+                <h2 class="section-header-title">SUCCESS KPI</h2>
+                <div class="section-header-arabic">قياس النجاح — مؤشرات الأداء الرئيسي</div>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--gold-accent);">🇦🇪</div>
+                        <div class="kpi-title">National Records</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--cyan);">⏱</div>
+                        <div class="kpi-title">Personal Bests (PB)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--gold-accent);">📊</div>
+                        <div class="kpi-title">World Aquatics Points</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--cyan);">🌍</div>
+                        <div class="kpi-title">International Ranking</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--gold-accent);">🔥</div>
+                        <div class="kpi-title">Finalists</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--cyan);">⚡</div>
+                        <div class="kpi-title">Semi-Finalists</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--gold-accent);">🎟</div>
+                        <div class="kpi-title">Qualifiers</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div style="font-size: 2.2rem; color: var(--gold-accent);">🥇</div>
+                        <div class="kpi-title">Medals</div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>السباح الذي يحسن مستواه بشكل كبير هو نجاح للمنظومة حتى قبل الميدالية.</p>
+                    <div class="en-sub">A swimmer achieving massive progression is a system victory even before reaching
+                        the podium.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           16 — TECHNICAL & SCIENTIFIC TEAM
+           ========================================================================== -->
+        <section class="experience-section" id="section-16" data-section-name="TECHNICAL TEAM">
+            <div class="section-container">
+                <div class="tagline">16 — MULTI-DISCIPLINARY SUPPORT</div>
+                <h2 class="section-header-title">TECHNICAL & SCIENTIFIC TEAM</h2>
+                <div class="section-header-arabic">الجهاز الفني والعلمي المتكامل</div>
+
+                <div class="team-ecosystem-grid">
+                    <div class="team-member-card director">
+                        <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.85rem;">LEADERSHIP</span>
+                        <div
+                            style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: var(--white); margin: 0.3rem 0;">
+                            Technical Director</div>
+                        <div style="font-size: 1.25rem; font-weight: 800; color: var(--gold-accent);">Captain Yasser El
+                            Farmawy</div>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">National Team Coaches</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">مدربو المنتخبات الوطنية
+                        </p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Strength & Conditioning Coach</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">مدرب القوة والإعداد
+                            البدني</p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Sports Scientist</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">خبير العلوم الرياضية</p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Physiotherapist</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">أخصائي العلاج الطبيعي</p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Sports Nutritionist</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">أخصائي التغذية الرياضية
+                        </p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Sports Psychologist</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">الأخصائي النفسي الرياضي
+                        </p>
+                    </div>
+
+                    <div class="team-member-card">
+                        <div class="team-role-title">Performance Analyst</div>
+                        <p style="font-size: 0.85rem; color: var(--cyan); margin-top: 0.4rem;">محلل الأداء الفني
+                            والبيانات</p>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>الهدف: اللاعب تحت منظومة متكاملة، وليس تحت مدرب واحد فقط.</p>
+                    <div class="en-sub">Goal: The athlete is nurtured by a complete integrated system, not a single
+                        coach.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           17 — NATIONAL TECHNICAL CURRICULUM
+           ========================================================================== -->
+        <section class="experience-section" id="section-17" data-section-name="CURRICULUM">
+            <div class="section-container">
+                <div class="tagline">17 — UNIFIED FRAMEWORK</div>
+                <h2 class="section-header-title">NATIONAL TECHNICAL CURRICULUM</h2>
+                <div class="section-header-arabic">المنهج الفني الوطني — UAE Technical Curriculum</div>
+
+                <div class="curriculum-ages-flex">
+                    <div class="age-curr-card">
+                        <div class="age-label">U10</div>
+                        <p style="font-size: 0.85rem; font-weight: 700; color: var(--white);">التأسيس التكنيكي العام
+                            والمرح والشمولية</p>
+                    </div>
+                    <div class="age-curr-card">
+                        <div class="age-label">U12</div>
+                        <p style="font-size: 0.85rem; font-weight: 700; color: var(--white);">تطوير الكفاءة المهارية
+                            والسرعات الأساسية</p>
+                    </div>
+                    <div class="age-curr-card">
+                        <div class="age-label">U14</div>
+                        <p style="font-size: 0.85rem; font-weight: 700; color: var(--white);">بداية التخصص وبناء التحمل
+                            التكتيكي</p>
+                    </div>
+                    <div class="age-curr-card">
+                        <div class="age-label">U16</div>
+                        <p style="font-size: 0.85rem; font-weight: 700; color: var(--white);">التخصص الاحترافي وبناء
+                            القوة المتقدمة</p>
+                    </div>
+                    <div class="age-curr-card">
+                        <div class="age-label">U18</div>
+                        <p style="font-size: 0.85rem; font-weight: 700; color: var(--white);">الأداء العالي الجاهزية
+                            الدولية</p>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>الاتحاد يضع Standards — الأندية تطور — المنتخب يجمع أفضل الرياضيين.</p>
+                    <div class="en-sub">The Federation sets standards — Clubs develop — The National Team gathers the
+                        finest athletes.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           18 — COACH DEVELOPMENT
+           ========================================================================== -->
+        <section class="experience-section" id="section-18" data-section-name="COACH DEVELOPMENT">
+            <div class="section-container">
+                <div class="tagline">18 — COACHING ECOSYSTEM</div>
+                <h2 class="section-header-title">COACH DEVELOPMENT</h2>
+                <div class="section-header-arabic">تطوير المدربين — UAE Coaches Development Program</div>
+
+                <div class="grid-4" style="margin-top: 2.5rem;">
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">🎓</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Technical Clinics</h3>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">📹</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Race Analysis</h3>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">🏋️‍♂️</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Strength & Conditioning</h3>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">🔬</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Sports Science</h3>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">🔍</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Talent Identification</h3>
+                    </div>
+
+                    <div class="glass-card">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cyan);">📅</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Periodization</h3>
+                    </div>
+
+                    <div class="glass-card" style="grid-column: span 2;">
+                        <div style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--gold-accent);">🏆</div>
+                        <h3 style="font-size: 1.1rem; color: var(--white);">Competition Planning</h3>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>تطوير اللاعب يبدأ بتطوير البيئة والمدرب.</p>
+                    <div class="en-sub">Athlete progression originates from empowering the coaching environment.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           19 — IMPLEMENTATION ROADMAP
+           ========================================================================== -->
+        <section class="experience-section" id="section-19" data-section-name="ROADMAP">
+            <div class="section-container">
+                <div class="tagline">19 — EXECUTION TIMELINE</div>
+                <h2 class="section-header-title">IMPLEMENTATION ROADMAP</h2>
+                <div class="section-header-arabic">خطة التنفيذ | 90 يوم إلى 3 سنوات</div>
+
+                <div class="roadmap-timeline-grid">
+                    <div class="roadmap-card">
+                        <div class="roadmap-timeframe">0–90 يوم</div>
+                        <div class="roadmap-phase-title">ASSESSMENT</div>
+                        <p style="font-size: 0.9rem; color: var(--white); line-height: 1.5;">
+                            تقييم الوضع الحالي، الأرقام، المواهب، الأندية، وقاعدة البيانات الوطنية.
+                        </p>
+                    </div>
+
+                    <div class="roadmap-card">
+                        <div class="roadmap-timeframe">3–6 أشهر</div>
+                        <div class="roadmap-phase-title">BUILD</div>
+                        <p style="font-size: 0.9rem; color: var(--white); line-height: 1.5;">
+                            Talent Pool، المنتخبات، الاختبارات، المناهج، و Performance Monitoring.
+                        </p>
+                    </div>
+
+                    <div class="roadmap-card">
+                        <div class="roadmap-timeframe">6–12 شهراً</div>
+                        <div class="roadmap-phase-title">PERFORM</div>
+                        <p style="font-size: 0.9rem; color: var(--white); line-height: 1.5;">
+                            بطولات مختارة، معسكرات، تحليل الأداء، تحقيق PB و National Records.
+                        </p>
+                    </div>
+
+                    <div class="roadmap-card" style="border-color: var(--gold-accent);">
+                        <div class="roadmap-timeframe" style="color: var(--gold-accent);">1–3 سنوات</div>
+                        <div class="roadmap-phase-title" style="color: var(--gold-accent);">HIGH PERFORMANCE</div>
+                        <p style="font-size: 0.9rem; color: var(--white); line-height: 1.5;">
+                            إنجازات خليجية وعربية وآسيوية ومسار عالمي وأولمبي مستدام.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           20 — GENERAL SUPERVISOR PROFILE (CAPTAIN SHERIF ALWI)
+           ========================================================================== -->
+        <section class="experience-section" id="section-20" data-section-name="GENERAL SUPERVISOR">
+            <div class="section-container">
+                <div class="tagline">20 — GENERAL SUPERVISION & MANAGEMENT</div>
+                <h2 class="section-header-title">CAPTAIN SHERIF ALWI</h2>
+                <div class="section-header-arabic">كابتن شريف علوي | المشرف العام على السباحة والإدارة الفنية</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 0.8rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Sfreif/WhatsApp Image 2026-09-06 at 4.09.44 PM (2).jpeg" alt="Captain Sherif Alwi" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">GENERAL SUPERVISOR OF SWIMMING</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--white);">كابتن شريف علوي</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Sfreif/WhatsApp Image 2026-09-06 at 4.09.44 PM.jpeg" alt="Sherif Alwi Photo 1" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Sfreif/WhatsApp Image 2026-09-06 at 4.09.44 PM (1).jpeg" alt="Sherif Alwi Photo 2" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Sfreif/WhatsApp Image 2026-09-06 at 4.09.44 PM (3).jpeg" alt="Sherif Alwi Photo 3" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>إشراف عام متكامل يضمن أعلى مستويات الحوكمة والانضباط والدعم اللوجستي والفني لمنظومة السباحة.</p>
+                    <div class="en-sub">Comprehensive general supervision ensuring top-tier governance, operational discipline, and full support for the swimming ecosystem.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           21 — UAE SWIMMING 2032
+           ========================================================================== -->
+        <section class="experience-section" id="section-21" data-section-name="UAE 2032">
+            <div class="section-container">
+                <div class="tagline">21 — LONG TERM VISION</div>
+                <h2 class="section-header-title">UAE SWIMMING 2032</h2>
+                <div class="section-header-arabic">رؤية السباحة الإماراتية 2032</div>
+
+                <div class="olympic-2032-banner">
+                    <div style="font-size: 1.1rem; font-weight: 800; color: var(--gold-accent); letter-spacing: 2px;">
+                        ROAD TO THE 2032 OLYMPICS
+                    </div>
+
+                    <div class="year-sequence-bar" style="direction: rtl;">
+                        <div class="year-chip">2026</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2027</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2028</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2029</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2030</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2031</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip target-2032">2032</div>
+                    </div>
+
+                    <div class="generations-grid">
+                        <div class="gen-card">
+                            <h3>جيل أول | 1st Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">جاهز للمنافسة الدولية الفورية</p>
+                        </div>
+                        <div class="gen-card">
+                            <h3>جيل ثانٍ | 2nd Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">جاهز للانتقال إلى مستوى Senior</p>
+                        </div>
+                        <div class="gen-card">
+                            <h3>جيل ثالث | 3rd Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">قيد التطوير والتأسيس المستدام</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>لا يبدأ المنتخب من الصفر كل دورة أولمبية.</p>
+                    <div class="en-sub">The national team never restarts from scratch every Olympic cycle.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           22 — PRIVATE ACADEMIES & STRATEGIC MONETIZATION (PART 1)
+           ========================================================================== -->
+        <section class="experience-section" id="section-22" data-section-name="PRIVATE ACADEMIES (1)">
+            <div class="section-container">
+                <div class="tagline">22 — PRIVATE ACADEMIES & STRATEGIC MONETIZATION (PART 1)</div>
+                <h2 class="section-header-title">PRIVATE ACADEMIES & SPORTS MONETIZATION</h2>
+                <div class="section-header-arabic">الأكاديميات الخاصة | طرق الاستفادة المادية والرياضية وتطوير المنظومة (الجزء الأول)</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0.6rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.35 PM (1).jpeg" alt="Academy Swimming 1" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">ACADEMY PIPELINE (PART 1)</span>
+                                <span style="font-size: 1.05rem; font-weight: 800; color: var(--white);">الأكاديميات الخاصة</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.34 PM.jpeg" alt="Academy Swimming 2" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.34 PM (1).jpeg" alt="Academy Swimming 3" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.35 PM.jpeg" alt="Academy Swimming 4" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.35 PM (2).jpeg" alt="Academy Swimming 5" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.36 PM (1).jpeg" alt="Academy Swimming 6" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.36 PM (2).jpeg" alt="Academy Swimming 7" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>تكامل استراتيجي مع الأكاديميات الخاصة يضمن تحويل الاستثمار الرياضي إلى موارد مالية مستدامة وقاعدة موهوبين وطنية.</p>
+                    <div class="en-sub">Strategic integration with private academies transforming sports investment into sustainable financial returns and a strong national talent pool.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           22 — PRIVATE ACADEMIES & STRATEGIC MONETIZATION (PART 2)
+           ========================================================================== -->
+        <section class="experience-section" id="section-22" data-section-name="PRIVATE ACADEMIES (2)">
+            <div class="section-container">
+                <div class="tagline">22 — PRIVATE ACADEMIES & STRATEGIC MONETIZATION (PART 2)</div>
+                <h2 class="section-header-title">PRIVATE ACADEMIES & SPORTS MONETIZATION</h2>
+                <div class="section-header-arabic">الأكاديميات الخاصة | طرق الاستفادة المادية والرياضية وتطوير المنظومة (الجزء الثاني)</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0.6rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.36 PM (3).jpeg" alt="Academy Swimming 8" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">ACADEMY PIPELINE (PART 2)</span>
+                                <span style="font-size: 1.05rem; font-weight: 800; color: var(--white);">الأكاديميات الخاصة</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.36 PM.jpeg" alt="Academy Swimming 9" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.37 PM.jpeg" alt="Academy Swimming 10" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.37 PM (1).jpeg" alt="Academy Swimming 11" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.37 PM (2).jpeg" alt="Academy Swimming 12" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.37 PM (3).jpeg" alt="Academy Swimming 13" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 320px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Academy/WhatsApp Image 2026-09-06 at 4.18.38 PM.jpeg" alt="Academy Swimming 14" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>حوكمة الاعتماد البرامجي والمسابقات الخاصة لتحقيق الاستدامة المالية وتوسيع انتشار قاعدة السباحين.</p>
+                    <div class="en-sub">Governing program accreditation and private competitions to achieve financial sustainability and expand the swimmer base.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           23 — TECHNICAL DIRECTOR PROFILE (CAPTAIN YASSER EL FARMAWY - PART 1)
+           ========================================================================== -->
+        <section class="experience-section" id="section-23" data-section-name="TECHNICAL DIRECTOR CV">
+            <div class="section-container">
+                <div class="tagline">23 — TECHNICAL DIRECTOR PROFILE</div>
+                <h2 class="section-header-title">CAPTAIN YASSER EL FARMAWY</h2>
+                <div class="section-header-arabic">كابتن ياسر الفرماوي | المدير الفني للمنتخب — السيرة الذاتية والمؤهلات
+                </div>
+
+                <div class="grid-2" style="gap: 1.5rem; margin-top: 0.8rem;">
+                    <!-- Photo & Academic Profile Card -->
+                    <div class="glass-card"
+                        style="padding: 1.25rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div class="media-frame"
+                            style="height: 280px; width: 100%; border-radius: 12px; margin-bottom: 0.8rem; background: rgba(3,27,43,0.9);">
+                            <img src="images/Yaser elfaramawy/1.jpg" alt="Captain Yasser El Farmawy"
+                                style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay"
+                                style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">TECHNICAL
+                                    DIRECTOR</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--white);">كابتن ياسر
+                                    الفرماوي</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: rgba(201, 162, 39, 0.15); border: 1px solid var(--gold-accent); padding: 0.6rem 1rem; border-radius: 8px; width: 100%;">
+                            <div
+                                style="font-size: 0.85rem; font-weight: 800; color: var(--gold-accent); font-family: var(--font-arabic);">
+                                المؤهلات العلمية والأكاديمية</div>
+                            <ul style="list-style: none; text-align: right; font-size: 0.8rem; color: var(--white); margin-top: 0.4rem; display: grid; gap: 0.25rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                <li>🎓 <strong>ماجستير التربية الرياضية</strong> — جامعة حلوان (2005)</li>
+                                <li>📜 <strong>دبلومة الدراسات العليا</strong> — جامعة حلوان (2002)</li>
+                                <li>🎓 <strong>بكالوريوس التربية الرياضية</strong> — جامعة الإسكندرية (1988)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Specialized Studies & National Team Experience -->
+                    <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <div class="glass-card" style="padding: 1rem;">
+                            <div style="font-size: 0.9rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.4rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                🇫🇷 🇩🇪 الدراسات والدورات المتخصصة الدولية
+                            </div>
+                            <ul style="list-style: none; font-size: 0.8rem; color: rgba(247,250,252,0.9); display: grid; gap: 0.3rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                <li>• <strong>الاتحاد الفرنسي لألعاب الماء:</strong> الإعداد السباحي للمراحل المتقدمة
+                                    (بوردو 1995)</li>
+                                <li>• <strong>الاتحاد الألماني للسباحة:</strong> التحليل الحركي لسباحة المنافسات (برلين
+                                    1996)</li>
+                                <li>• <strong>دورات صقل أوروبية:</strong> لوكسمبورج (1999) - سويسرا (2002) - ألمانيا
+                                    (2005)</li>
+                                <li>• <strong>محاضر دولي ومحلي:</strong> محاضر دورات إعداد معلمي ومدربي السباحة (1998 :
+                                    2000)</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass-card" style="padding: 1rem;">
+                            <div style="font-size: 0.9rem; font-weight: 800; color: var(--gold-accent); margin-bottom: 0.4rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                🇪🇬 الخبرات القيادية مع المنتخبات القومية
+                            </div>
+                            <ul style="list-style: none; font-size: 0.8rem; color: rgba(247,250,252,0.9); display: grid; gap: 0.3rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                <li>• <strong>عضو اللجنة الفنية بالاتحاد المصري للسباحة</strong> للمياه المفتوحة (2015 -
+                                    2016)</li>
+                                <li>• <strong>مدرب المنتخب الوطني للمياه المفتوحة</strong> (2003 - 2004)</li>
+                                <li>• <strong>مدرب المنتخب الوطني للناشئين للسباحة</strong> (1994 - 1996)</li>
+                                <li>• <strong>مدير مركز تدريب الفرق القومية للغوص والإنقاذ</strong> بستاد القاهرة (2012)
+                                </li>
+                                <li>• <strong>مدرب قطاع الموهوبين رياضياً</strong> بمدرسة الموهوبين بستاد القاهرة (1992
+                                    - 1999)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>قيادة فنية تجمع بين التخصص الأكاديمي والخبرة الميدانية الدولية.</p>
+                    <div class="en-sub">Technical leadership blending high academic credentials with extensive
+                        international expertise.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           24 — OLYMPIC ACHIEVEMENTS & PRODUCED CHAMPIONS (PART 2)
+           ========================================================================== -->
+        <section class="experience-section" id="section-24" data-section-name="OLYMPIC & CHAMPIONS RECORD">
+            <div class="section-container">
+                <div class="tagline">24 — OLYMPIC & ELITE TRACK RECORD</div>
+                <h2 class="section-header-title">PRODUCED CHAMPIONS & OLYMPIC RECORD</h2>
+                <div class="section-header-arabic">الإنجازات الدولية وإعداد السباحين الأولمبيين</div>
+
+                <div class="grid-2" style="gap: 1.2rem; margin-top: 0.8rem; align-items: start;">
+                    <!-- Left: Champions List -->
+                    <div class="glass-card" style="padding: 1rem;">
+                        <div style="font-size: 0.95rem; font-weight: 800; color: var(--gold-accent); margin-bottom: 0.5rem; font-family: var(--font-arabic);"
+                            dir="rtl">
+                            🏆 أبرز السباحين والأبطال الأولمبيين
+                        </div>
+
+                        <div style="display: grid; gap: 0.5rem;" dir="rtl">
+                            <div
+                                style="background: rgba(3,27,43,0.6); border-right: 3px solid var(--gold-accent); padding: 0.5rem 0.8rem; border-radius: 6px;">
+                                <div style="font-weight: 800; color: var(--white); font-size: 0.85rem;">🥇 السباح مازن
+                                    عزيز</div>
+                                <div style="font-size: 0.78rem; color: var(--cyan);">أولمبياد لندن 2012 (سباحة المياه
+                                    المفتوحة 10 كم)</div>
+                            </div>
+
+                            <div
+                                style="background: rgba(3,27,43,0.6); border-right: 3px solid var(--cyan); padding: 0.5rem 0.8rem; border-radius: 6px;">
+                                <div style="font-weight: 800; color: var(--white); font-size: 0.85rem;">🥉 اللاعبة سميحة
+                                    ياسين مبارك</div>
+                                <div style="font-size: 0.78rem; color: var(--cyan);">برونزية كأس العالم للمياه المفتوحة
+                                    10 كم (2005) وتأهل أولمبياد أثينا 2004</div>
+                            </div>
+
+                            <div
+                                style="background: rgba(3,27,43,0.6); border-right: 3px solid var(--gold-accent); padding: 0.5rem 0.8rem; border-radius: 6px;">
+                                <div style="font-weight: 800; color: var(--white); font-size: 0.85rem;">🏊‍♂️ السباح
+                                    أحمد مصطفى حسين</div>
+                                <div style="font-size: 0.78rem; color: var(--cyan);">أولمبياد سيدني 2000 وأولمبياد أثينا
+                                    2004 • المركز 10 عالمياً (برشلونة 2005)</div>
+                            </div>
+
+                            <div
+                                style="background: rgba(3,27,43,0.6); border-right: 3px solid var(--cyan); padding: 0.5rem 0.8rem; border-radius: 6px;">
+                                <div style="font-weight: 800; color: var(--white); font-size: 0.85rem;">🏊‍♂️ السباح
+                                    هاني محمود</div>
+                                <div style="font-size: 0.78rem; color: var(--cyan);">أولمبياد سيدني 2000</div>
+                            </div>
+
+                            <div
+                                style="background: rgba(201,162,39,0.15); border: 1px solid var(--gold-accent); padding: 0.5rem 0.8rem; border-radius: 6px; text-align: center;">
+                                <div style="font-weight: 900; color: var(--gold-accent); font-size: 0.9rem;">🎖 +100
+                                    ميدالية دولية متنوعة</div>
+                                <div style="font-size: 0.75rem; color: var(--white);">في بطولات أفريقيا والعرب والبحر
+                                    المتوسط (ناشئين وعمومي)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Images Gallery & Video Button & Club Record -->
+                    <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
+                            <div class="media-frame" style="height: 230px; background: rgba(3,27,43,0.9);">
+                                <img src="images/Yaser elfaramawy/1 (2).jpg" alt="Captain Yasser Coaching"
+                                    style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            </div>
+                            <div class="media-frame" style="height: 230px; background: rgba(3,27,43,0.9);">
+                                <img src="images/Yaser elfaramawy/team.jpg" alt="National Champions Team"
+                                    style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            </div>
+                        </div>
+
+                        <!-- Video Player Interactive Button -->
+                        <button class="video-play-btn" onclick="openVideoModal('videos/yaser Elfaramawy.mp4')"
+                            title="تشغيل الفيديو التوثيقي لكابتن ياسر الفرماوي">
+                            <span class="play-icon">▶</span>
+                            <div style="text-align: right; width: 100%; font-family: var(--font-arabic);" dir="rtl">
+                                <div style="font-weight: 800; font-size: 0.92rem; color: var(--gold-accent);">🎬 عرض
+                                    الفيديو التوثيقي لكابتن ياسر الفرماوي</div>
+                                <div style="font-size: 0.75rem; color: var(--cyan); margin-top: 0.1rem;">اضغط لمشاهدة
+                                    مسيرة وإنجازات كابتن ياسر الفرماوي</div>
+                            </div>
+                        </button>
+
+                        <div class="glass-card" style="padding: 0.8rem;">
+                            <div style="font-size: 0.88rem; font-weight: 800; color: var(--cyan); margin-bottom: 0.3rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                🏛 القيادة الفنية والأندية والإنجاز المحلي
+                            </div>
+                            <ul style="list-style: none; font-size: 0.78rem; color: rgba(247,250,252,0.85); display: grid; gap: 0.25rem; font-family: var(--font-arabic);"
+                                dir="rtl">
+                                <li>• <strong>رئيس جهاز ألعاب الماء بنادي الشمس:</strong> (2008 - 2017) والدرع العام
+                                    ديسمبر 2005</li>
+                                <li>• <strong>درع السباحة العام:</strong> المركز الثاني لأكثر من 8 مواسم متتالية</li>
+                                <li>• <strong>درع المياه المفتوحة:</strong> المركز الأول موسم 2000 والمركز الثاني لأكثر
+                                    من 15 مرة</li>
+                                <li>• <strong>المدير الفني والمستشار:</strong> نادي الصيد، نادي العبور، نادي الرواد،
+                                    نادي هليوليدو، سبورتنج</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           25 — HEAD COACH PROFILE (CAPTAIN MOHAMED MANSOUR - PART 1)
+           ========================================================================== -->
+        <section class="experience-section" id="section-25" data-section-name="HEAD COACH CV">
+            <div class="section-container">
+                <div class="tagline">25 — HEAD COACH PROFILE</div>
+                <h2 class="section-header-title">CAPTAIN MOHAMED MANSOUR</h2>
+                <div class="section-header-arabic">كابتن محمد منصور | المدرب العام للمنتخب — السيرة الذاتية والخبرات التدريبية</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr; gap: 0.8rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.28 PM (3).jpeg" alt="Captain Mohamed Mansour" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">HEAD COACH</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--white);">كابتن محمد منصور</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.27 PM.jpeg" alt="Mohamed Mansour Photo 1" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.27 PM (1).jpeg" alt="Mohamed Mansour Photo 2" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.28 PM.jpeg" alt="Mohamed Mansour Photo 3" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.28 PM (1).jpeg" alt="Mohamed Mansour Photo 4" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>قيادة تدريبية ميدانية ترتكز على التحليل الرقمي وتطوير الأداء الفني العالي للسباحين.</p>
+                    <div class="en-sub">Hands-on coaching leadership driven by performance analytics and elite technical swimmer development.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           26 — HEAD COACH EXPERTISE & FIELD WORK (CAPTAIN MOHAMED MANSOUR - PART 2)
+           ========================================================================== -->
+        <section class="experience-section" id="section-26" data-section-name="HEAD COACH EXPERTISE">
+            <div class="section-container">
+                <div class="tagline">26 — FIELD WORK & ATHLETE DEVELOPMENT</div>
+                <h2 class="section-header-title">CAPTAIN MOHAMED MANSOUR — FIELD EXPERTISE</h2>
+                <div class="section-header-arabic">كابتن محمد منصور | العمل الميداني وإعداد أبطال المنتخبات الوطنية</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 0.8rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.28 PM (2).jpeg" alt="Mohamed Mansour Coaching" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">FIELD EXPERTISE</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--white);">كابتن محمد منصور</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.29 PM.jpeg" alt="Mohamed Mansour Action 1" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.29 PM (1).jpeg" alt="Mohamed Mansour Action 2" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                        <div class="media-frame" style="height: 330px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Mo Mansour/WhatsApp Image 2026-09-06 at 4.15.29 PM (2).jpeg" alt="Mohamed Mansour Action 3" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>عمل ميداني مكثف يضمن تحقيق أعلى معدلات الاستفادة الفنية واستدامة صناعة الأبطال.</p>
+                    <div class="en-sub">Intensive hands-on field implementation ensuring maximum technical gains and sustainable champion production.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           27 — YOUTH CATEGORIES COACH PROFILE (CAPTAIN ALSHERIF HEMDAN)
+           ========================================================================== -->
+        <section class="experience-section" id="section-27" data-section-name="YOUTH CATEGORIES COACH">
+            <div class="section-container">
+                <div class="tagline">27 — YOUTH CATEGORIES COACH PROFILE</div>
+                <h2 class="section-header-title">CAPTAIN ALSHERIF HEMDAN</h2>
+                <div class="section-header-arabic">كابتن الشريف حمدان | مدرب المراحل السنية — مدرب منتخب السودان سابقاً</div>
+
+                <div class="glass-card" style="padding: 1.2rem; margin-top: 0.8rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: center; width: 100%;">
+                        <div class="media-frame" style="height: 350px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Alsherif Hemdan/WhatsApp Image 2026-09-06 at 4.16.34 PM.jpeg" alt="Captain Alsherif Hemdan" style="object-fit: contain; object-position: center; width: 100%; height: 100%; padding: 0.4rem;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--gold-accent); font-weight: 800; font-size: 0.8rem;">YOUTH CATEGORIES COACH</span>
+                                <span style="font-size: 1.1rem; font-weight: 800; color: var(--white);">كابتن الشريف حمدان</span>
+                            </div>
+                        </div>
+                        <div class="media-frame" style="height: 350px; border-radius: 12px; background: rgba(3,27,43,0.9);">
+                            <img src="images/Alsherif Hemdan/2.jpeg" alt="Captain Alsherif Hemdan Photo 2" style="object-fit: contain; object-position: center; width: 100%; height: 100%; padding: 0.4rem;">
+                            <div class="media-overlay" style="padding: 0.8rem; background: linear-gradient(180deg, transparent 30%, rgba(3,27,43,0.95) 100%);">
+                                <span style="color: var(--cyan); font-weight: 800; font-size: 0.8rem;">FORMER SUDAN NATIONAL TEAM COACH</span>
+                                <span style="font-size: 1.05rem; font-weight: 800; color: var(--white);">مدرب منتخب السودان سابقاً</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 0.8rem;">
+                    <p>خبرة تدريبية دولية متخصصة في تأسيس وصناعة سباحي المراحل السنية وبناء القواعد التنافسية.</p>
+                    <div class="en-sub">Specialized international coaching expertise in developing youth age-group swimmers and building strong competitive foundations.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           28 — UAE SWIMMING 2032
+           ========================================================================== -->
+        <section class="experience-section" id="section-28" data-section-name="UAE 2032">
+            <div class="section-container">
+                <div class="tagline">28 — LONG TERM VISION</div>
+                <h2 class="section-header-title">UAE SWIMMING 2032</h2>
+                <div class="section-header-arabic">رؤية السباحة الإماراتية 2032</div>
+
+                <div class="olympic-2032-banner">
+                    <div style="font-size: 1.1rem; font-weight: 800; color: var(--gold-accent); letter-spacing: 2px;">
+                        ROAD TO THE 2032 OLYMPICS
+                    </div>
+
+                    <div class="year-sequence-bar" style="direction: rtl;">
+                        <div class="year-chip">2026</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2027</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2028</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2029</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2030</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip">2031</div>
+                        <div style="color: var(--gold-accent); font-size: 1.2rem;">←</div>
+                        <div class="year-chip target-2032">2032</div>
+                    </div>
+
+                    <div class="generations-grid">
+                        <div class="gen-card">
+                            <h3>جيل أول | 1st Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">جاهز للمنافسة الدولية الفورية</p>
+                        </div>
+                        <div class="gen-card">
+                            <h3>جيل ثانٍ | 2nd Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">جاهز للانتقال إلى مستوى Senior</p>
+                        </div>
+                        <div class="gen-card">
+                            <h3>جيل ثالث | 3rd Generation</h3>
+                            <p style="font-size: 0.95rem; color: var(--white);">قيد التطوير والتأسيس المستدام</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statement-box" style="margin-top: 3rem;">
+                    <p>لا يبدأ المنتخب من الصفر كل دورة أولمبية.</p>
+                    <div class="en-sub">The national team never restarts from scratch every Olympic cycle.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================================================
+           29 — OUR COMMITMENT
+           ========================================================================== -->
+        <section class="experience-section" id="section-29" data-section-name="OUR COMMITMENT">
+            <div class="section-container commitment-box">
+                <div class="tagline" style="justify-content: center;">29 — THE SOLEMN PROMISE</div>
+
+                <h2 class="commitment-en-main">
+                    We are not coming to manage a national team.<br>
+                    <span style="color: var(--cyan);">We are coming to build a national swimming system.</span>
+                </h2>
+
+                <div class="commitment-ar-main">
+                    لسنا قادمين لإدارة منتخب لفترة مؤقتة.<br>
+                    نحن قادمون لبناء منظومة وطنية للسباحة.
+                </div>
+
+                <!-- Animated Pipeline Final Summary -->
+                <div
+                    style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 2rem 0; direction: rtl;">
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--white);">اكتشاف</span>
+                    <span style="color: var(--gold-accent); font-size: 1.4rem;">←</span>
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--white);">قياس</span>
+                    <span style="color: var(--gold-accent); font-size: 1.4rem;">←</span>
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--white);">تطوير</span>
+                    <span style="color: var(--gold-accent); font-size: 1.4rem;">←</span>
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--white);">منافسة</span>
+                    <span style="color: var(--gold-accent); font-size: 1.4rem;">←</span>
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--gold-accent);">إنجاز</span>
+                </div>
+
+                <div class="commitment-final-quote">
+                    <p>
+                        "هدفنا ليس أن نبحث عن البطل؛<br>
+                        بل أن نبني النظام الذي يصنع الأبطال باستمرار."
+                    </p>
+                    <div style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--cyan); font-weight: 700;">
+                        Technical Director: Captain Yasser El Farmawy
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>UAE National Swimming Team — High Performance Development & National Team Pathway</p>
+    </div>
+
+    <!-- Video Modal Overlay -->
+    <div class="video-modal-overlay" id="video-modal" onclick="closeVideoModal(event)">
+        <div class="video-modal-container" onclick="event.stopPropagation()">
+            <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+            <div class="video-modal-header">
+                🎥 DOCUMENTARY VIDEO — CAPTAIN YASSER EL FARMAWY
+            </div>
+            <video id="modal-video-player" controls preload="metadata"
+                style="width: 100%; border-radius: 12px; background: #000; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+                <source src="videos/yaser Elfaramawy.mp4" type="video/mp4">
+                المتصفح لا يدعم تشغيل هذا الفيديو.
+            </video>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+       CENTRALIZED MEDIA CONFIGURATION & APPLICATION SCRIPT
+       ========================================================================== -->
+    <script>
+        /* Centralized MEDIA Configuration as requested */
+        const MEDIA = {
+            hero: "images/hero.jpg",
+            swimmer01: "images/swimmer-01.jpg",
+            swimmer02: "images/swimmer-02.jpg",
+            swimmer03: "images/swimmer-03.jpg",
+            team: "images/team.jpg",
+            training: "images/training.jpg",
+
+            heroVideo: "videos/hero.mp4",
+            trainingVideo: "videos/training.mp4",
+            raceVideo: "videos/race-analysis.mp4"
+        };
+
+        /* Section Metadata List */
+        const SECTIONS = [
+            { id: "section-01", num: "01", name: "OUR VISION", ar: "رؤيتنا" },
+            { id: "section-02", num: "02", name: "WHY A SYSTEM", ar: "لماذا منظومة متكاملة" },
+            { id: "section-03", num: "03", name: "PHILOSOPHY", ar: "فلسفة المشروع" },
+            { id: "section-04", num: "04", name: "TEAM STRUCTURE", ar: "منظومة المنتخبات" },
+            { id: "section-05", num: "05", name: "DATABASE", ar: "قاعدة البيانات الوطنية" },
+            { id: "section-06", num: "06", name: "SELECTION SYSTEM", ar: "نظام انتقاء اللاعبين" },
+            { id: "section-07", num: "07", name: "SWIMMER SCORE", ar: "UAE Swimmer Score" },
+            { id: "section-08", num: "08", name: "SELECTION WINDOWS", ar: "فترات الاختيار" },
+            { id: "section-09", num: "09", name: "TALENT ID", ar: "برنامج اكتشاف المواهب" },
+            { id: "section-10", num: "10", name: "TALENT POOL", ar: "مجموعات المواهب" },
+            { id: "section-11", num: "11", name: "TRAINING MODEL", ar: "نموذج التدريب عالي الأداء" },
+            { id: "section-12", num: "12", name: "RACE ANALYSIS", ar: "تحليل السباق" },
+            { id: "section-13", num: "13", name: "TECHNOLOGY", ar: "التكنولوجيا والمتابعة" },
+            { id: "section-14", num: "14", name: "COMPETITION PATHWAY", ar: "مسار البطولات" },
+            { id: "section-15", num: "15", name: "SUCCESS KPI", ar: "قياس النجاح" },
+            { id: "section-16", num: "16", name: "TECHNICAL TEAM", ar: "الجهاز الفني والعلمي" },
+            { id: "section-17", num: "17", name: "CURRICULUM", ar: "المنهج الفني الوطني" },
+            { id: "section-18", num: "18", name: "COACH DEVELOPMENT", ar: "تطوير المدربين" },
+            { id: "section-19", num: "19", name: "ROADMAP", ar: "خطة التنفيذ" },
+            { id: "section-20", num: "20", name: "GENERAL SUPERVISOR", ar: "المشرف العام على السباحة" },
+            { id: "section-21", num: "21", name: "PRIVATE ACADEMIES (1)", ar: "الأكاديميات الخاصة والاستثمار (1)" },
+            { id: "section-22", num: "22", name: "PRIVATE ACADEMIES (2)", ar: "الأكاديميات الخاصة والاستثمار (2)" },
+            { id: "section-23", num: "23", name: "TECHNICAL DIRECTOR CV (1)", ar: "السيرة الذاتية للمدير الفني" },
+            { id: "section-24", num: "24", name: "OLYMPIC RECORD & CHAMPIONS", ar: "الإنجازات والأبطال الأولمبيين" },
+            { id: "section-25", num: "25", name: "HEAD COACH CV (1)", ar: "المدرب العام — السيرة الذاتية" },
+            { id: "section-26", num: "26", name: "HEAD COACH EXPERTISE (2)", ar: "المدرب العام — العمل الميداني" },
+            { id: "section-27", num: "27", name: "YOUTH CATEGORIES COACH", ar: "مدرب المراحل السنية" },
+            { id: "section-28", num: "28", name: "UAE 2032", ar: "السباحة الإماراتية 2032" },
+            { id: "section-29", num: "29", name: "OUR COMMITMENT", ar: "التزامنا ورسالتنا" }
+        ];
+
+        /* Initialize Navigation Controls & UI */
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            initWaterEngine();
+            initAnimations();
+            initAudioSynth();
+            initFullscreen();
+        });
+
+        /* --- 01. NAVIGATION CONTROLS --- */
+        let currentSectionIndex = 0;
+
+        function initNavigation() {
+            const dotsContainer = document.getElementById('nav-dots-container');
+            const modalGrid = document.getElementById('modal-grid');
+
+            SECTIONS.forEach((sec, idx) => {
+                // Render Sidebar Dot
+                const dotItem = document.createElement('a');
+                dotItem.className = `nav-item ${idx === 0 ? 'active' : ''}`;
+                dotItem.href = `#${sec.id}`;
+                dotItem.dataset.index = idx;
+                dotItem.innerHTML = `
+                    <div class="nav-dot"></div>
+                    <div class="nav-label">${sec.num} — ${sec.name}</div>
+                `;
+                dotItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToSection(idx);
+                });
+                dotsContainer.appendChild(dotItem);
+
+                // Render Modal Card
+                const card = document.createElement('div');
+                card.className = 'modal-card';
+                card.innerHTML = `
+                    <div class="num">${sec.num}</div>
+                    <div class="text">
+                        <div>${sec.name}</div>
+                        <div style="font-size: 0.75rem; color: var(--gold-accent);">${sec.ar}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    scrollToSection(idx);
+                    toggleModal(false);
+                });
+                modalGrid.appendChild(card);
+            });
+
+            // Modal Toggles
+            const drawerBtn = document.getElementById('drawer-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const modal = document.getElementById('nav-modal');
+
+            drawerBtn.addEventListener('click', () => toggleModal(true));
+            closeModalBtn.addEventListener('click', () => toggleModal(false));
+
+            function toggleModal(open) {
+                if (open) modal.classList.add('open');
+                else modal.classList.remove('open');
+            }
+
+            // On-screen Slide Prev/Next Buttons
+            const prevBtn = document.getElementById('prev-slide-btn');
+            const nextBtn = document.getElementById('next-slide-btn');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) scrollToSection(currentSectionIndex - 1);
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (currentSectionIndex < SECTIONS.length - 1) scrollToSection(currentSectionIndex + 1);
+                });
+            }
+
+            // Keyboard Presentation Controls (Arrow keys, Space, Page Up/Down)
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                    e.preventDefault();
+                    if (currentSectionIndex < SECTIONS.length - 1) scrollToSection(currentSectionIndex + 1);
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    if (currentSectionIndex > 0) scrollToSection(currentSectionIndex - 1);
+                }
+            });
+
+            // Mouse Wheel Slide Switching (Debounced)
+            let isWheelBusy = false;
+            window.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (isWheelBusy) return;
+                isWheelBusy = true;
+
+                if (e.deltaY > 0 || e.deltaX > 0) {
+                    if (currentSectionIndex < SECTIONS.length - 1) scrollToSection(currentSectionIndex + 1);
+                } else if (e.deltaY < 0 || e.deltaX < 0) {
+                    if (currentSectionIndex > 0) scrollToSection(currentSectionIndex - 1);
+                }
+
+                setTimeout(() => { isWheelBusy = false; }, 500);
+            }, { passive: false });
+
+            // Touch Swipe Slide Deck Navigation
+            let touchStartX = 0;
+            let touchStartY = 0;
+            window.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            window.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+
+                if (Math.abs(diffX) > 40 || Math.abs(diffY) > 40) {
+                    if (diffX > 40 || diffY > 40) {
+                        if (currentSectionIndex < SECTIONS.length - 1) scrollToSection(currentSectionIndex + 1);
+                    } else if (diffX < -40 || diffY < -40) {
+                        if (currentSectionIndex > 0) scrollToSection(currentSectionIndex - 1);
+                    }
+                }
+            }, { passive: true });
+
+            // Initialize initial active slide (Slide 01)
+            scrollToSection(0);
+        }
+
+        /* Slide Switcher Function */
+        function scrollToSection(idx) {
+            if (idx < 0) idx = 0;
+            if (idx >= SECTIONS.length) idx = SECTIONS.length - 1;
+            currentSectionIndex = idx;
+
+            SECTIONS.forEach((sec, i) => {
+                const el = document.getElementById(sec.id);
+                if (el) {
+                    if (i === idx) {
+                        el.classList.add('active-slide');
+                    } else {
+                        el.classList.remove('active-slide');
+                    }
+                }
+            });
+
+            updateActiveNav(idx);
+            triggerSectionAnimation(idx);
+        }
+
+        function updateActiveNav(idx) {
+            document.getElementById('current-sec-num').textContent = SECTIONS[idx].num;
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach((item, i) => {
+                if (i === idx) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+        }
+
+
+        /* --- 02. CONTINUOUS ANIMATED WATER CANVAS ENGINE --- */
+        function initWaterEngine() {
+            const canvas = document.getElementById('water-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            let waveOffset = 0;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                initParticles();
+            }
+
+            function initParticles() {
+                particles = [];
+                const particleCount = Math.floor(width / 25);
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 2.5 + 0.5,
+                        alpha: Math.random() * 0.4 + 0.1,
+                        speedY: -(Math.random() * 0.4 + 0.1),
+                        speedX: (Math.random() - 0.5) * 0.2
+                    });
+                }
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            function drawWater() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Deep Gradient Fill
+                const gradient = ctx.createLinearGradient(0, 0, 0, height);
+                gradient.addColorStop(0, '#031B2B');
+                gradient.addColorStop(0.5, '#063A5C');
+                gradient.addColorStop(1, '#031B2B');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+
+                // Underwater Caustics / Waves
+                waveOffset += 0.008;
+
+                ctx.save();
+                ctx.globalCompositeOperation = 'screen';
+
+                // Wave Layer 1
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(0, 184, 217, 0.04)';
+                ctx.moveTo(0, 0);
+                for (let x = 0; x <= width; x += 40) {
+                    const y = Math.sin(x * 0.005 + waveOffset) * 40 + Math.cos(x * 0.003 + waveOffset * 0.8) * 20 + 100;
+                    ctx.lineTo(x, y);
+                }
+                ctx.lineTo(width, 0);
+                ctx.closePath();
+                ctx.fill();
+
+                // Wave Layer 2 (Light Rays)
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(55, 213, 232, 0.03)';
+                for (let i = 0; i < 5; i++) {
+                    const rayX = (width / 4) * i + Math.sin(waveOffset + i) * 60;
+                    ctx.moveTo(rayX - 40, 0);
+                    ctx.lineTo(rayX + 120, height);
+                    ctx.lineTo(rayX + 220, height);
+                    ctx.lineTo(rayX + 60, 0);
+                }
+                ctx.fill();
+
+                ctx.restore();
+
+                // Floating Aqua Particles
+                ctx.fillStyle = '#37D5E8';
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+
+                    if (p.y < 0) p.y = height;
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(drawWater);
+            }
+
+            drawWater();
+        }
+
+
+        /* --- 03. GSAP ANIMATIONS --- */
+        function initAnimations() {
+            if (typeof gsap === 'undefined') return;
+            triggerSectionAnimation(0);
+        }
+
+        function triggerSectionAnimation(idx) {
+            if (typeof gsap === 'undefined' || !SECTIONS[idx]) return;
+            const targetSec = document.getElementById(SECTIONS[idx].id);
+            if (!targetSec) return;
+
+            const animTargets = targetSec.querySelectorAll('.section-header-title, .section-header-arabic, .glass-card, .statement-box, .pipe-node, .pyr-level, .kpi-card, .roadmap-card, .window-card, .pillar-card, .tech-card, .stair-step, .team-member-card');
+
+            gsap.fromTo(animTargets,
+                { y: 20, opacity: 0, scale: 0.98 },
+                { y: 0, opacity: 1, scale: 1, duration: 0.5, stagger: 0.05, ease: 'power2.out', overwrite: 'auto' }
+            );
+        }
+
+
+        /* --- 04. OPTIONAL AMBIENT AUDIO SYNTHESIZER --- */
+        function initAudioSynth() {
+            const soundBtn = document.getElementById('sound-btn');
+            let audioCtx = null;
+            let oscillator = null;
+            let gainNode = null;
+            let isPlaying = false;
+
+            soundBtn.addEventListener('click', () => {
+                if (!isPlaying) {
+                    if (!audioCtx) {
+                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        oscillator = audioCtx.createOscillator();
+                        gainNode = audioCtx.createGain();
+
+                        // Soft low-frequency underwater hum (55Hz)
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(55, audioCtx.currentTime);
+
+                        const filter = audioCtx.createBiquadFilter();
+                        filter.type = 'lowpass';
+                        filter.frequency.setValueAtTime(120, audioCtx.currentTime);
+
+                        oscillator.connect(filter);
+                        filter.connect(gainNode);
+                        gainNode.connect(audioCtx.destination);
+
+                        gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                        oscillator.start();
+                    } else {
+                        audioCtx.resume();
+                        gainNode.gain.setTargetAtTime(0.08, audioCtx.currentTime, 0.1);
+                    }
+                    soundBtn.textContent = '🔊';
+                    isPlaying = true;
+                } else {
+                    if (audioCtx) {
+                        gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
+                    }
+                    soundBtn.textContent = '🔇';
+                    isPlaying = false;
+                }
+            });
+        }
+
+
+        /* --- 05. FULLSCREEN TOGGLE ENGINE --- */
+        function initFullscreen() {
+            const fsBtn = document.getElementById('fullscreen-btn');
+            if (!fsBtn) return;
+
+            fsBtn.addEventListener('click', toggleFullscreen);
+
+            function toggleFullscreen() {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    const docEl = document.documentElement;
+                    if (docEl.requestFullscreen) {
+                        docEl.requestFullscreen();
+                    } else if (docEl.webkitRequestFullscreen) {
+                        docEl.webkitRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            }
+
+            function updateFsBtn() {
+                const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (isFS) {
+                    fsBtn.innerHTML = '🗗 خروج من الشاشة الكاملة';
+                    fsBtn.style.borderColor = 'var(--gold-accent)';
+                    fsBtn.style.color = 'var(--gold-accent)';
+                } else {
+                    fsBtn.innerHTML = '⛶ ملء الشاشة';
+                    fsBtn.style.borderColor = 'var(--glass-border)';
+                    fsBtn.style.color = 'var(--cyan)';
+                }
+            }
+
+            document.addEventListener('fullscreenchange', updateFsBtn);
+            document.addEventListener('webkitfullscreenchange', updateFsBtn);
+        }
+
+        /* --- 06. VIDEO MODAL CONTROLLER --- */
+        function openVideoModal(videoSrc) {
+            const modal = document.getElementById('video-modal');
+            const player = document.getElementById('modal-video-player');
+            if (videoSrc && player) {
+                player.src = videoSrc;
+            }
+            if (modal) {
+                modal.classList.add('open');
+                if (player) {
+                    player.play().catch(e => console.log('Autoplay handled:', e));
+                }
+            }
+        }
+
+        function closeVideoModal(e) {
+            if (e && e.target && !e.target.classList.contains('video-modal-overlay') && !e.target.classList.contains('video-modal-close')) {
+                return;
+            }
+            const modal = document.getElementById('video-modal');
+            const player = document.getElementById('modal-video-player');
+            if (modal) {
+                modal.classList.remove('open');
+                if (player) {
+                    player.pause();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
