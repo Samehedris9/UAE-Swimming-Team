@@ -290,6 +290,7 @@
 
         /* Vertical Navigation Panel (Absolute Far-Left Edge) */
         nav.nav-sidebar {
+            display: none !important;
             position: fixed;
             left: 1rem;
             /* Pinned to absolute far-left edge */
@@ -3682,8 +3683,21 @@
             initNavigation();
             initWaterEngine();
             initAnimations();
-            initAudioSynth();
+            initBackgroundAudio();
             initFullscreen();
+
+            // Handle video events to automatically pause/resume ambient audio
+            const modalVideoPlayer = document.getElementById('modal-video-player');
+            if (modalVideoPlayer) {
+                modalVideoPlayer.addEventListener('play', pauseBgAudioForVideo);
+                modalVideoPlayer.addEventListener('pause', () => {
+                    const modal = document.getElementById('video-modal');
+                    if (!modal || !modal.classList.contains('open')) {
+                        resumeBgAudioAfterVideo();
+                    }
+                });
+                modalVideoPlayer.addEventListener('ended', resumeBgAudioAfterVideo);
+            }
         });
 
         /* --- 01. NAVIGATION CONTROLS --- */
@@ -3830,7 +3844,8 @@
         }
 
         function updateActiveNav(idx) {
-            document.getElementById('current-sec-num').textContent = SECTIONS[idx].num;
+            const numEl = document.getElementById('current-sec-num');
+            if (numEl) numEl.textContent = SECTIONS[idx].num;
             const items = document.querySelectorAll('.nav-item');
             items.forEach((item, i) => {
                 if (i === idx) item.classList.add('active');
@@ -3842,6 +3857,7 @@
         /* --- 02. CONTINUOUS ANIMATED WATER CANVAS ENGINE --- */
         function initWaterEngine() {
             const canvas = document.getElementById('water-canvas');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
 
             let width, height;
@@ -3875,7 +3891,6 @@
             function drawWater() {
                 ctx.clearRect(0, 0, width, height);
 
-                // Deep Gradient Fill
                 const gradient = ctx.createLinearGradient(0, 0, 0, height);
                 gradient.addColorStop(0, '#031B2B');
                 gradient.addColorStop(0.5, '#063A5C');
@@ -3883,13 +3898,11 @@
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, width, height);
 
-                // Underwater Caustics / Waves
                 waveOffset += 0.008;
 
                 ctx.save();
                 ctx.globalCompositeOperation = 'screen';
 
-                // Wave Layer 1
                 ctx.beginPath();
                 ctx.fillStyle = 'rgba(0, 184, 217, 0.04)';
                 ctx.moveTo(0, 0);
@@ -3960,49 +3973,77 @@
         }
 
 
-        /* --- 04. OPTIONAL AMBIENT AUDIO SYNTHESIZER --- */
-        function initAudioSynth() {
+        /* --- 04. BACKGROUND AUDIO CONTROLLER (Music.mpeg) --- */
+        let bgAudio = null;
+        let isAudioUserEnabled = true;
+        let isVideoPlaying = false;
+        const SOFT_VOLUME = 0.04; // صوت خافت يكاد يكون مسموع
+
+        function initBackgroundAudio() {
+            bgAudio = new Audio('Music.mpeg');
+            bgAudio.loop = true;
+            bgAudio.volume = SOFT_VOLUME;
+
             const soundBtn = document.getElementById('sound-btn');
-            let audioCtx = null;
-            let oscillator = null;
-            let gainNode = null;
-            let isPlaying = false;
 
-            soundBtn.addEventListener('click', () => {
-                if (!isPlaying) {
-                    if (!audioCtx) {
-                        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                        oscillator = audioCtx.createOscillator();
-                        gainNode = audioCtx.createGain();
-
-                        // Soft low-frequency underwater hum (55Hz)
-                        oscillator.type = 'sine';
-                        oscillator.frequency.setValueAtTime(55, audioCtx.currentTime);
-
-                        const filter = audioCtx.createBiquadFilter();
-                        filter.type = 'lowpass';
-                        filter.frequency.setValueAtTime(120, audioCtx.currentTime);
-
-                        oscillator.connect(filter);
-                        filter.connect(gainNode);
-                        gainNode.connect(audioCtx.destination);
-
-                        gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                        oscillator.start();
-                    } else {
-                        audioCtx.resume();
-                        gainNode.gain.setTargetAtTime(0.08, audioCtx.currentTime, 0.1);
-                    }
-                    soundBtn.textContent = '🔊';
-                    isPlaying = true;
-                } else {
-                    if (audioCtx) {
-                        gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
-                    }
-                    soundBtn.textContent = '🔇';
-                    isPlaying = false;
+            function tryPlayAudio() {
+                if (isAudioUserEnabled && !isVideoPlaying && bgAudio) {
+                    bgAudio.play().then(() => {
+                        if (soundBtn) soundBtn.textContent = '🔊';
+                    }).catch(err => {
+                        console.log('Audio autoplay deferred until interaction:', err);
+                        if (soundBtn) soundBtn.textContent = '🔇';
+                    });
                 }
-            });
+            }
+
+            // Attempt autoplay
+            tryPlayAudio();
+
+            // Start audio on first user click/touch if initial autoplay was blocked by browser policy
+            const unlockAudio = () => {
+                if (bgAudio && bgAudio.paused && isAudioUserEnabled && !isVideoPlaying) {
+                    tryPlayAudio();
+                }
+                document.removeEventListener('click', unlockAudio);
+                document.removeEventListener('touchstart', unlockAudio);
+                document.removeEventListener('keydown', unlockAudio);
+            };
+
+            document.addEventListener('click', unlockAudio);
+            document.addEventListener('touchstart', unlockAudio);
+            document.addEventListener('keydown', unlockAudio);
+
+            if (soundBtn) {
+                soundBtn.addEventListener('click', () => {
+                    if (bgAudio.paused) {
+                        isAudioUserEnabled = true;
+                        tryPlayAudio();
+                        soundBtn.textContent = '🔊';
+                    } else {
+                        isAudioUserEnabled = false;
+                        bgAudio.pause();
+                        soundBtn.textContent = '🔇';
+                    }
+                });
+            }
+        }
+
+        function pauseBgAudioForVideo() {
+            isVideoPlaying = true;
+            if (bgAudio && !bgAudio.paused) {
+                bgAudio.pause();
+            }
+        }
+
+        function resumeBgAudioAfterVideo() {
+            isVideoPlaying = false;
+            if (bgAudio && isAudioUserEnabled) {
+                bgAudio.play().then(() => {
+                    const soundBtn = document.getElementById('sound-btn');
+                    if (soundBtn) soundBtn.textContent = '🔊';
+                }).catch(e => console.log('Resume audio prevented:', e));
+            }
         }
 
 
@@ -4049,6 +4090,7 @@
 
         /* --- 06. VIDEO MODAL CONTROLLER --- */
         function openVideoModal(videoSrc) {
+            pauseBgAudioForVideo();
             const modal = document.getElementById('video-modal');
             const player = document.getElementById('modal-video-player');
             if (videoSrc && player) {
@@ -4074,6 +4116,7 @@
                     player.pause();
                 }
             }
+            resumeBgAudioAfterVideo();
         }
     </script>
 </body>
